@@ -26,7 +26,7 @@ export default class NevarCommand extends BaseCommand {
     }
 
     private async geilerBot(): Promise<any> {
-        const nevarEmbed: EmbedBuilder = this.client.createEmbed("Unser Bot ist auf der Basis vom Nevar Bot aufgebaut."+ .
+        const nevarEmbed: EmbedBuilder = this.client.createEmbed("Unser Bot ist auf der Basis vom Nevar Bot aufgebaut."+
         "Diesen Bot kannst du kostenlos auf deinem Discord Server einladen. Hier kommst du auf die Website https://nevar.eu", "arrow", "normal");
         return this.interaction.followUp({ embeds: [nevarEmbed] });
     }
