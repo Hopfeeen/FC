@@ -1,0 +1,61 @@
+include ./templates/head
+body.dark-mode.sidebar-mini.layout-fixed.layout-navbar-fixed.layout-footer-fixed.wrapper
+    include ./templates/topbar
+    include ./templates/sidebar-main
+    .content-wrapper
+            .content-header
+                .container-fluid
+                    .row.mb-2.col-sm-6
+                        h1.m-0 Willkommen, #{user.global_name}!
+            section.content.container-fluid
+                include ./templates/cookieBanner
+                .row
+                    each guild in guilds
+                        .col-12.col-sm-6.col-md-3
+                            .info-box
+                                span.info-box-icon.elevation-1
+                                    if guild.icon
+                                        img(src=`https://cdn.discordapp.com/icons/${guild.id}/${guild.icon}?size=256`, alt="Guild icon", style="height: 100%; width: 100%; object-fit: contain;border-radius:5px;")
+                                    else
+                                        img(src=`https://cdn.discordapp.com/embed/avatars/${Math.floor(Math.random() * 6)}.png`, alt="Guild icon", style="height: 100%; width: 100%; object-fit: contain;border-radius:5px;")
+                                .info-box-content
+                                    span.info-box-text #{guild.name}
+                                    span.info-box-number
+                                        |
+                                        a(href=`/dashboard/${guild.id}`) Server verwalten
+            .container-fluid(style='margin-top: 5rem;')
+                .row
+                    each guild in notInvitedGuilds
+                        .col-12.col-sm-6.col-md-3
+                            .info-box(style="filter: grayscale(75%);")
+                                span.info-box-icon.elevation-1
+                                    if guild.icon
+                                        img(src=`https://cdn.discordapp.com/icons/${guild.id}/${guild.icon}?size=256`, alt="Guild icon", style="height: 100%; width: 100%; object-fit: contain;border-radius:5px;")
+                                    else
+                                        img(src=`https://cdn.discordapp.com/embed/avatars/${Math.floor(Math.random() * 6)}.png`, alt="Guild icon", style="height: 100%; width: 100%; object-fit: contain;border-radius:5px;")
+                                .info-box-content
+                                    span.info-box-text #{guild.name}
+                                    span.info-box-number
+                                        |
+                                        a(href=`${inviteUrl}&guild_id=${guild.id}&disable_guild_select=true`, class="popup-invite") #{client.user.username} einladen
+include ./templates/footer
+
+script.
+    const links = document.querySelectorAll('.popup-invite');
+    links.forEach(function(link) {
+        link.addEventListener('click', function(event) {
+            event.preventDefault();
+            const width = 600;
+            const height = 650;
+            const left = (window.innerWidth / 2) - (width / 2);
+            const top = (window.innerHeight / 2) - (height / 2);
+            const popup = window.open(this.href, "Nevar einladen", "width=" + width + ",height=" + height + ",top=" + top + ",left=" + left);
+
+            const timer = setInterval(function() {
+                if(popup.closed) {
+                    clearInterval(timer);
+                    location.reload();
+                }
+            }, 500);
+        });
+    });

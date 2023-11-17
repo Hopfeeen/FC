@@ -1,0 +1,37 @@
+include ../../templates/head
+body.dark-mode.sidebar-mini.layout-fixed.layout-navbar-fixed.layout-footer-fixed.wrapper
+    include ../../templates/topbar
+    include ../../templates/sidebar-guild
+    .content-wrapper
+        include ../../templates/breadcrumbs
+        section.content.container-fluid
+            include ../../templates/cookieBanner
+            if saved === true
+                .alert.alert-success.alert-dismissible
+                    button(type="button", class="close", data-dismiss="alert", aria-hidden="true") ×
+                    h5
+                        i.icon.fas.fa-check
+                        | Daten übernommen
+                    | Die Einstellungen wurden erfolgreich gespeichert.
+            .callout.callout-info
+                h5 Erklärung
+                p Rollen welche doppeltes XP bekommen sollen, werden hier festgelegt
+            .card.card-default
+                .card-header
+                    h3.card-title Einstellungen
+                    .card-tools
+                        button.btn.btn-tool(type='button', data-card-widget='collapse')
+                            i.fas.fa-minus
+                .card-body
+                    .row
+                        .col-md-6
+                            form(action=`/dashboard/${guild.id}/levelsystem/doublexp/save` method='post')
+                                .form-group
+                                    label(data-toggle="tooltip" data-placement="top" title="Rollen welche doppeltes XP erhalten") Doppel-XP
+                                    select.form-control(name="doublexp" autocomplete="off" class="selectpicker" multiple data-live-search="true")
+                                        each role in [...guild.roles.cache]
+                                            if role[1].id !== guild.id && !role[1].managed
+                                                option(value=role[1].id, selected=(guildData.settings.levels ? guildData.settings.levels.doubleXP.includes(role[1].id) : false)) #{role[1].name}
+
+                                button.btn.btn-block.btn-primary(type='submit') Speichern
+include ../../templates/footer

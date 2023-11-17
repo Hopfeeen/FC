@@ -1,0 +1,116 @@
+#####################################################################################
+#
+#                  _______ _______ ___ ___ _______ ______
+#                  |    |  |    ___|   |   |   _   |   __ \
+#                  |    |  |    ___|   |   |       |   |  <
+#                  |__|____|_______|\_____/|___|___|___|__|
+#
+#####################################################################################
+## Automatically created config for Nevar-{version}
+## Regenerate this file via "npm run config" or "node assets/install"
+#####################################################################################
+
+# All fields with an * behind are necessary, all fields without can be left blank
+
+#####################################################################################
+#####################################################################################
+
+[ general ]
+# Enter your bot token here*
+BOT_TOKEN = ""
+# Your MongoDB login url*
+MONGO_CONNECTION = ""
+# Used as embed author url*
+WEBSITE = ""
+# All the IDs of the owners of the bot
+OWNER_IDS = []
+
+[ support ]
+# ID of your support server*
+ID = ""
+# An invitation from your support server*
+INVITE = ""
+# ID of the channel where the bot sends its logs*
+BOT_LOG = ""
+# ID of the channel where the bot sends its errors*
+ERROR_LOG = ""
+
+[ embeds ]
+# Default footer text for all embeds*
+FOOTER_TEXT = ""
+# Color settings for embeds*
+DEFAULT_COLOR = "#5865F2"
+SUCCESS_COLOR = "#00A56A"
+WARNING_COLOR = "#F7E919"
+ERROR_COLOR = "#D61A3C"
+TRANSPARENT_COLOR = "#36393F"
+
+[ api ]
+# Whether the API should be enabled*
+ENABLED = true
+# If so, a port must be specified
+PORT = 8075
+
+[ channels ]
+# ID and design of the channel where the current number of servers is displayed (the already existing variable in {} is automatically replaced)
+SERVER_COUNT_ID = ""
+SERVER_COUNT_NAME = "💻 ➜ {count} servers"
+
+# ID and design of the channel where the current number of votes is displayed (the already existing variable in {} is automatically replaced)
+USER_COUNT_ID = ""
+USER_COUNT_NAME = "👥 ➜ {count} users"
+
+# ID and design of the channel where the current number of votes is displayed (the already existing variable in {} is automatically replaced)
+VOTE_COUNT_ID = ""
+VOTE_COUNT_NAME = "🤍 ➜ {count} votes"
+# ID of the channel where new votes get announced
+VOTE_ANNOUNCEMENT_ID = ""
+
+[ apikeys ]
+# Most of the following APIs offer a free API key and no paid subscription is required, but some, such as openai.com, require a paid subscription.
+# top.gg
+TOP_GG = ""
+TOP_GG_AUTH = ""
+# openweathermap.org/api
+WEATHER = ""
+# platform.openai.com
+OPENAI = ""
+# perspectiveapi.com
+GOOGLE = ""
+# dev.twitch.tv/console/apps
+TWITCH_CLIENT_ID = ""
+TWITCH_CLIENT_SECRET = ""
+
+[ dashboard ]
+# Whether the dashboard should be enabled*
+ENABLED = false
+# If so, a port must be specified
+PORT = 80
+# The callback uri you defined in the discord developer portal*
+CALLBACK_URI = ""
+# The client secret of your discord application*
+CLIENT_SECRET = ""
+# A random string that is used to encrypt the session, generate one with the following command:
+# node -e "console.log([...Array(64)].map(_=>(Math.random()*36|0).toString(36)).join(''))"
+SESSION_SECRET = ""
+# A hexadecimal string that is used to encrypt access token cookies, must be 32 bytes long. Generate one with the following command:
+# node -e "console.log(require('crypto').randomBytes(32).toString('hex'))"
+ENCRYPTION_KEY = ""
+
+
+# All presences are defined here
+[[ presence ]]
+STATUS = "online" # The bot's status [online, idle, dnd, invisible]
+TYPE = "Competing" # Status type for the bot [Playing | Listening | Watching | Competing | Streaming | Custom]
+MESSAGE = "{guilds} Servern" # The message that is displayed
+URL = "" # Only needed for streaming
+
+[[ presence]]
+STATUS = "online"
+TYPE = "Playing"
+MESSAGE = "mit {users} Nutzern"
+
+[[ presence ]]
+STATUS = "online"
+TYPE = "Watching"
+MESSAGE = "nevar.eu"
