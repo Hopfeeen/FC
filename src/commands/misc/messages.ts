@@ -30,7 +30,7 @@ export default class NevarCommand extends BaseCommand {
         const messagesFile: any = JSON.parse(fs.readFileSync("./assets/messages.json"));
         const count: number = messagesFile?.count || 0;
         const writers: number = messagesFile?.writer.length || 0;
-        const nevarEmbed: EmbedBuilder = this.client.createEmbed("Heute wurden bisher {0} Nachrichten von {1} Menschen geschrieben! Danke für eure Aktivität <3", this.client.emotes.arrow, "normal", count, writers);
+        const nevarEmbed: EmbedBuilder = this.client.createEmbed("Heute wurden bisher **{0} Nachrichten** von **{1} Menschen** geschrieben! Danke für eure Aktivität <3", "arrow", "normal", count, writers);
 return this.interaction.followUp({ embeds: [nevarEmbed] });
     }
 }
