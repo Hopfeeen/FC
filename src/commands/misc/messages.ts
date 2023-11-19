@@ -30,8 +30,7 @@ export default class NevarCommand extends BaseCommand {
         const messagesFile: any = JSON.parse(fs.readFileSync("./assets/messages.json"));
         const count: number = messagesFile?.count || 0;
         const writers: number = messagesFile?.writer.length || 0;
-        const nevarEmbed: EmbedBuilder = this.client.createEmbed("Heute wurden bisher {0} Nachrichten von {1} Schreibern gesendet", null, "normal", count, writers);
-nevarEmbed.setImage("https://cdn.discordapp.com/attachments/1116797977432961197/1175852167047958628/OLESEEEN.png?ex=656cbcaa&is=655a47aa&hm=3e6b05f68da7d9cac63bda4b41015bc05f37bc8f84096a319933bd1ed67ec237&");
+        const nevarEmbed: EmbedBuilder = this.client.createEmbed("Heute wurden bisher {0} Nachrichten von {1} Menschen geschrieben! Danke für eure Aktivität <3", this.client.emotes.arrow, "normal", count, writers);
 return this.interaction.followUp({ embeds: [nevarEmbed] });
     }
 }
