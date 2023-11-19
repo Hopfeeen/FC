@@ -42,7 +42,7 @@ export default class {
 		/* Initiate presence handler */
 		handlePresence(client);
 
-		scheduleJob("40 20 * * *", async (): Promise<void> => {
+		scheduleJob("0 0 * * *", async (): Promise<void> => {
             const messagesFile: any = JSON.parse(fs.readFileSync("./assets/messages.json"));
             const count: number = messagesFile?.count || 0;
             const writers: number = messagesFile?.writer.length || 0;
