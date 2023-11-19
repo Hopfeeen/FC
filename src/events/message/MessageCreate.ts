@@ -5,6 +5,7 @@ const ms: any = ems("de");
 // @ts-ignore - Could not find a declaration file for module 'perspective-api-client'
 import Perspective from "perspective-api-client";
 import OpenAI from "openai";
+import * as fs from "fs"
 
 export default class {
 	private client: BaseClient;
@@ -30,6 +31,14 @@ export default class {
 		member.data = data.member;
 		member.user.data = data.user;
 
+		const messagesFile = JSON.parse(fs.readFileSync("./assets/messages.json"));
+
+if (!message.author.bot) {
+    messagesFile.count = (messagesFile?.count || 0) + 1;
+    messagesFile.writer = [...new Set([...(messagesFile.writer || []), message.author.id])];
+    fs.writeFileSync("./assets/messages.json", JSON.stringify(messagesFile, null, 2));
+}
+﻿
 		/* Afk system */
 		/* Author mentions afk user */
 		if ((message.mentions.repliedUser || message.mentions.users) && !message.author.bot) {
@@ -51,8 +60,9 @@ export default class {
 				[0, 5, "Gute Nacht"],
 				[5, 10, "Guten Morgen"],
 				[11, 13, "Guten Mittag"],
-				[14, 17, "Guten Tag"],
-				[18, 23, "Guten Abend"]
+				[14, 16, "Guten Tag"],
+				[17, 18, "COME ON EFFZEH"] 
+				[19, 23, "Guten Abend"]
 			];
 
 			let greeting;
