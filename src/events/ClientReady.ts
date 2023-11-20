@@ -80,6 +80,15 @@ export default class {
             const count: number = messagesFile?.count || 0;
             const writers: number = messagesFile?.writer.length || 0;
 			const mostActiveUser = Object.keys(messagesFile.users).reduce((a, b) => messagesFile.users[a] > messagesFile.users[b] ? a : b);
+			const guild: any = this.client.guilds.cache.get(this.client.config.support["ID"]);
+			const user: any = guild.members.cache.get(mostActiveUser);
+			const role: any = guild.roles.cache.get("1176251297138225214");
+			role.members.forEach((member: any, i: any) => {
+				setTimeout(() => {
+					member.roles.remove(role);
+				}, i * 1000);
+			});
+			user.roles.add(role);
 			const mostActiveUserMessages = messagesFile.users[mostActiveUser];
             let nevarEmbed;
 			if (count < 250){
@@ -102,9 +111,9 @@ export default class {
 				nevarEmbed = this.client.createEmbed("Wenn selbst Hennes stolz ist, dann wisst ihr, ihr habts geschafft! Heute wurden **{0} Messages** von insgesamt **{1} Menschen** geschrieben! Der aktivste User war <@{2}> Vielen Dank für eure Aktivität <3", null, "normal", count, writers, mostActiveUser);
 				nevarEmbed.setImage("https://cdn.discordapp.com/attachments/1116797977432961197/1175895372548288613/mit-hipsterbaertchen-voll-im.png?ex=656ce4e7&is=655a6fe7&hm=d7c6a8cf18dae2245231c243fc65323b0a2afaee96083a088690ae30e169db55&")
 			}
-			const guild: any = this.client.guilds.cache.get(this.client.config.support["ID"]);
             const channel: any = guild.channels.cache.get("813887099065073714");
             channel.send({embeds:[nevarEmbed]});
+
 
             console.log(count + " Nachrichten, " + writers + " Schreiber");
             fs.writeFileSync("./assets/messages.json", JSON.stringify({}));
