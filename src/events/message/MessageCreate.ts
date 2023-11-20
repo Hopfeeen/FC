@@ -36,7 +36,12 @@ export default class {
 if (!message.author.bot) {
     messagesFile.count = (messagesFile?.count || 0) + 1;
     messagesFile.writer = [...new Set([...(messagesFile.writer || []), message.author.id])];
+	if (!messagesFile.users) {
+        messagesFile.users = {};
+    }
+	messagesFile.users[message.author.id] = (messagesFile.users[message.author.id] || 0) + 1;
     fs.writeFileSync("./assets/messages.json", JSON.stringify(messagesFile, null, 2));
+	
 }
 ﻿
 		/* Afk system */
