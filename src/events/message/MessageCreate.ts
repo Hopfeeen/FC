@@ -83,7 +83,7 @@ if (!message.author.bot) {
 			);
 			const greetingText: string =
 				"**{0}**" +
-				"\n\n{1} Ich bin {2} und helfe dir bei der Verwaltung deines Servers." +
+				"\n\n{1} Ich bin {2} und helfe dir bei deinen Problemen" +
 				"\n{1} Eine Übersicht meiner Befehle erhältst du durch folgenden Befehl: {3}";
 
 			const helpEmbed: EmbedBuilder = this.client.createEmbed(
