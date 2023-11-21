@@ -66,7 +66,7 @@ if (!message.author.bot) {
 				[5, 10, "Guten Morgen"],
 				[11, 13, "Guten Mittag"],
 				[14, 16, "Guten Tag"],
-				[17, 18, "COME ON EFFZEH"] 
+				[17, 18, "COME ON EFFZEH"],
 				[19, 23, "Guten Abend"]
 			];
 
