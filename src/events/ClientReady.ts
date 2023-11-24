@@ -49,7 +49,7 @@ export default class {
 			await channel.send({embeds:[embed]})
 			await this.client.wait(60*1000)
 			embed = this.client.createEmbed("# Noch 2 Minuten bis zum Start des Events", null, "normal")	
-			embed.setImage("https://cdn.discordapp.com/attachments/1116797977432961197/1177332320559177768/Platzhalter.png?ex=65721f2a&is=655faa2a&hm=60d59a70f12006c86673431ec2c6475489caccded6b058753b7e057c68b9580f&")
+			embed.setImage("https://cdn.discordapp.com/attachments/1116797977432961197/1177671560463663175/image.png?ex=65735b1c&is=6560e61c&hm=10639245745815188eb142546faeaa8d467db027104e570f55f0abb43dfca4a4&")
 			await channel.send({embeds:[embed]})
 			await this.client.wait(60*1000)
 			const button1: any = this.client.createButton("1", "JA!", "Success", null, false, null)
@@ -57,7 +57,7 @@ export default class {
 			const button3: any = this.client.createButton("3", "Apfelmus", "Primary", null, false, null)
 			const ButtonReihe: any = this.client.createMessageComponentsRow(button1, button2, button3)
 			embed = this.client.createEmbed("# Noch 1 Minute bis zum Start des Events!!! Klickt auf Buttons", null, "normal")	
-			embed.setImage("https://cdn.discordapp.com/attachments/1116797977432961197/1177332320559177768/Platzhalter.png?ex=65721f2a&is=655faa2a&hm=60d59a70f12006c86673431ec2c6475489caccded6b058753b7e057c68b9580f&")
+			embed.setImage("https://cdn.discordapp.com/attachments/1116797977432961197/1177671268577857586/image.png?ex=65735ad6&is=6560e5d6&hm=ddda7833ee7e5dcc406699f7de54516d449d2536e09e27100ea7391c225f379a&")
 			const buttonMessage = await channel.send({embeds:[embed], components:[ButtonReihe]})
 			const collector = buttonMessage.createMessageComponentCollector({componentType:ComponentType.Button, time:30*1000})
 			collector.on("collect",(interaction:any)=>{
@@ -72,7 +72,7 @@ export default class {
 			})
 			await this.client.wait(30*1000)
 			embed = this.client.createEmbed("# Denkt wohl ihr seid lustig, dafür starte ich das Event erst in 5 Minuten", null, "normal")	
-			embed.setImage("https://cdn.discordapp.com/attachments/1116797977432961197/1177332320559177768/Platzhalter.png?ex=65721f2a&is=655faa2a&hm=60d59a70f12006c86673431ec2c6475489caccded6b058753b7e057c68b9580f&")
+			embed.setImage("https://cdn.discordapp.com/attachments/1116797977432961197/1177672647157485790/image.png?ex=65735c1f&is=6560e71f&hm=5d0dd774c2c89af70400f5cea0e25179daf304958dcfa048c0c9826efbfc3dda&")
 			await channel.send({embeds:[embed]})
 			await this.client.wait(5*60*1000)
 			embed = this.client.createEmbed("# 2. Versuch, Event startet in 30 Sekunden", null, "normal")	
@@ -91,8 +91,12 @@ export default class {
 			await channel.send({embeds:[embed]})
 
 		})
-
-
+		scheduleJob("0 05 * * 6", async (): Promise<void> => {
+			const guild: any = this.client.guilds.cache.get(this.client.config.support["ID"]);
+			const channel: any = guild.channels.cache.get("813887099065073714")
+			let embed: any = this.client.createEmbed("# Folgende Updates gibt es nun beim Bot \n - **Jeden Samstag wird der Davie Selke Samstag vom Bot angekündigt** \n - **/schlaganfall** \n - **Jeder Spieltag wird im Event Tab angezeigt** \n - **/keeper** \n - **/gott** \n **/ea** \n **/kuss** \n **Neue /tor Bilder** (ab nähstem Spieltag)", null, "normal")	
+			embed.setImage("https://cdn.discordapp.com/attachments/1116797977432961197/1177676321724321893/image.png?ex=65735f8b&is=6560ea8b&hm=9d9ff670d824f9dd67b8529ead3fdb3b34cdb2ddea8b3a33dfaefd0ec8e2baa5&")
+		})
 
 
 		/* Initiate presence handler */
