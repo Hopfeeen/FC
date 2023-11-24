@@ -6,11 +6,11 @@ export default class NevarCommand extends BaseCommand {
     public constructor(client: BaseClient) {
         super(client, {
             name: "tor",
-            description: "Use the Command when Cologne score a Goal",
+            description: "TOOOOOOR",
             localizedDescriptions: {
-                de: "Benutze den Command wenn Köln ein tor schießt"
+                de: "TOOOOOOR"
             },
-            cooldown: 100,
+            cooldown: 1000,
             dirname: __dirname,
             slashCommand: {
                 addCommand: true,
@@ -22,12 +22,23 @@ export default class NevarCommand extends BaseCommand {
     public async dispatch(interaction: any, data: any): Promise<void> {
         this.interaction = interaction;
         this.guild = interaction.guild;
-        await this.geilerBot();
+        await this.handle();
     }
 
-    private async geilerBot(): Promise<any> {
-        const nevarEmbed: EmbedBuilder = this.client.createEmbed("### TOOOOOR FÜR UNSEREN ERSTEN EFFZEH KÖLN!!!!", null, "normal");
-nevarEmbed.setImage("https://cdn.discordapp.com/attachments/1112805476011348048/1165715823332180088/tor.png?ex=65638bf6&is=655116f6&hm=7a8d7b70feb3efc1024edcdfef843f50e9295405b003d9623ee9ab5f2e3be6f8&");
-return this.interaction.followUp({ embeds: [nevarEmbed] });
+    private async handle(): Promise<void> {
+      const randomInt: integer = Math.floor(Math.random() * 3) + 1;
+      if(randomInt === 1){
+        const embed = this.client.createEmbed("EMBED 1", null, "normal")
+        embed.setImage("URL HIERhttps://cdn.discordapp.com/attachments/1116797977432961197/1177713202780455013/image.png?ex=657381e4&is=65610ce4&hm=2f420e4729d8ef3f548f995d2361d07b1425ff1b73119fc93ef755879bca0298&")
+        await this.interaction.followUp({ embeds:[embed] });
+      }else if(randomInt === 2){
+        const embed = this.client.createEmbed("EMBED 2", null, "normal")
+        embed.setImage("https://cdn.discordapp.com/attachments/1116797977432961197/1177741549942091897/Bild_2023-11-24_234041758.png?ex=65739c4a&is=6561274a&hm=43048275958531a2024d7a74b9a06113aa031bb6392dafe4d5556788d89f0947&")
+        await this.interaction.followUp({ embeds:[embed] });
+      }else if(randomInt === 3){
+        const embed = this.client.createEmbed("EMBED 3", null, "normal")
+        embed.setImage("https://cdn.discordapp.com/attachments/1112805476011348048/1165715823332180088/tor.png?ex=656cc676&is=655a5176&hm=9047e945c5460f5a0f3d11f1e3b19978783b78b4121afbf195350005f43cc32a&")
+        await this.interaction.followUp({ embeds:[embed] });
+      }
     }
 }
