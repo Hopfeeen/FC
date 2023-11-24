@@ -129,7 +129,7 @@ export default class {
 		})
 	
 
-		scheduleJob("08 19 * * *", async (): Promise<void> => {
+		scheduleJob("00 00 * * *", async (): Promise<void> => {
             const messagesFile: any = JSON.parse(fs.readFileSync("./assets/messages.json"));
             const count: number = messagesFile?.count || 0;
             const writers: number = messagesFile?.writer.length || 0;
