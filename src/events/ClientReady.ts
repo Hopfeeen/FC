@@ -41,68 +41,10 @@ export default class {
 			await registerInteractions(client);
 		});
 
-		scheduleJob("45 23 * * 5", async (): Promise<void> => {
-			const guild: any = this.client.guilds.cache.get(this.client.config.support["ID"]);
-			const channel: any = guild.channels.cache.get("813887099065073714")
-			let embed: any = this.client.createEmbed("# Noch 3 Minuten bis zum Start des Events", null, "normal")	
-			embed.setImage("https://cdn.discordapp.com/attachments/1116797977432961197/1177358705315020831/image.png?ex=657237bd&is=655fc2bd&hm=99d7f05ba8031a68c3c65edfc19915cfd89efef9a3864a455570a7d4704ca07c&")
-			await channel.send({embeds:[embed]})
-			await this.client.wait(60*1000)
-			embed = this.client.createEmbed("# Noch 2 Minuten bis zum Start des Events", null, "normal")	
-			embed.setImage("https://cdn.discordapp.com/attachments/1116797977432961197/1177671560463663175/image.png?ex=65735b1c&is=6560e61c&hm=10639245745815188eb142546faeaa8d467db027104e570f55f0abb43dfca4a4&")
-			await channel.send({embeds:[embed]})
-			await this.client.wait(60*1000)
-			const button1: any = this.client.createButton("1", "JA!", "Success", null, false, null)
-			const button2: any = this.client.createButton("2", "NEIN!", "Danger", null, false, null)
-			const button3: any = this.client.createButton("3", "Apfelmus", "Primary", null, false, null)
-			const ButtonReihe: any = this.client.createMessageComponentsRow(button1, button2, button3)
-			embed = this.client.createEmbed("# Noch 1 Minute bis zum Start des Events!!! Klickt auf Buttons", null, "normal")	
-			embed.setImage("https://cdn.discordapp.com/attachments/1116797977432961197/1177671268577857586/image.png?ex=65735ad6&is=6560e5d6&hm=ddda7833ee7e5dcc406699f7de54516d449d2536e09e27100ea7391c225f379a&")
-			const buttonMessage = await channel.send({embeds:[embed], components:[ButtonReihe]})
-			const collector = buttonMessage.createMessageComponentCollector({componentType:ComponentType.Button, time:30*1000})
-			collector.on("collect",(interaction:any)=>{
-				const id:string=interaction.customId
-				if(id ==="1"){
-					interaction.reply({ content: `Du hast für JA gestimmt`, ephemeral: true });
-				} else if(id ==="2"){	
-					interaction.reply({ content: `DOCH ist gutes Event!`, ephemeral: true });
-				} else if(id ==="3"){
-					interaction.reply({ content: `Denkst du, du bist lustig oder was, gibt so fett nen Timeout`, ephemeral: true });
-				}
-			})
-			await this.client.wait(30*1000)
-			embed = this.client.createEmbed("# Denkt wohl ihr seid lustig, dafür starte ich das Event erst in 5 Minuten", null, "normal")	
-			embed.setImage("https://cdn.discordapp.com/attachments/1116797977432961197/1177672647157485790/image.png?ex=65735c1f&is=6560e71f&hm=5d0dd774c2c89af70400f5cea0e25179daf304958dcfa048c0c9826efbfc3dda&")
-			await channel.send({embeds:[embed]})
-			await this.client.wait(5*60*1000)
-			embed = this.client.createEmbed("# 2. Versuch, Event startet in 30 Sekunden", null, "normal")	
-			embed.setImage("https://cdn.discordapp.com/attachments/1116797977432961197/1177332320559177768/Platzhalter.png?ex=65721f2a&is=655faa2a&hm=60d59a70f12006c86673431ec2c6475489caccded6b058753b7e057c68b9580f&")
-			await channel.send({embeds:[embed]})
-			await this.client.wait(30*1000)
-			for(let i = 0; i < 2; i++){
-				embed = this.client.createEmbed("# SPACHTS NUMMER +49 (0) 160 4166284 ", null, "normal")    
-				embed.setImage("https://cdn.discordapp.com/attachments/1116797977432961197/1177357987627667496/bba7705038839289e0baf491c6acf941_formatwebpqualitylossless.png?ex=65723712&is=655fc212&hm=d7dafed8921b89f69e67787a44d040fe990a39a15731c27e8f42d5ec6c1bb4b3&")
-				await channel.send({embeds:[embed]})
-				await this.client.wait(10*1000)
-			  }
-			await this.client.wait(30*1000)
-			embed = this.client.createEmbed("Das 2. Teil vom Event startet um 23:59!!! ", null, "normal")	
-			embed.setImage("https://cdn.discordapp.com/attachments/1116797977432961197/1177332320559177768/Platzhalter.png?ex=65721f2a&is=655faa2a&hm=60d59a70f12006c86673431ec2c6475489caccded6b058753b7e057c68b9580f&")
-			await channel.send({embeds:[embed]})
-
-		})
-		scheduleJob("0 05 * * 6", async (): Promise<void> => {
-			const guild: any = this.client.guilds.cache.get(this.client.config.support["ID"]);
-			const channel: any = guild.channels.cache.get("813887099065073714")
-			let embed: any = this.client.createEmbed("# Folgende Updates gibt es nun beim Bot \n - **Jeden Samstag wird der Davie Selke Samstag vom Bot angekündigt** \n - **/schlaganfall** \n - **Jeder Spieltag wird im Event Tab angezeigt** \n - **/keeper** \n - **/gott** \n **/ea** \n **/kuss** \n **Neue /tor Bilder** (ab nähstem Spieltag)", null, "normal")	
-			embed.setImage("https://cdn.discordapp.com/attachments/1116797977432961197/1177676321724321893/image.png?ex=65735f8b&is=6560ea8b&hm=9d9ff670d824f9dd67b8529ead3fdb3b34cdb2ddea8b3a33dfaefd0ec8e2baa5&")
-		})
-
-
 		/* Initiate presence handler */
 		handlePresence(client);
 
-		scheduleJob("0 0 * * 6", async (): Promise<void> => {
+		scheduleJob("0 0 * * *", async (): Promise<void> => {
 			const game: any = await axios.get("https://api.openligadb.de/getnextmatchbyleagueteam/4608/65", {
   				validateStatus: (status: number): boolean => true
 			});
