@@ -92,7 +92,7 @@ export default class {
 					member.roles.remove(role);
 				}, i * 1000);
 			});
-			await this.client.wait(5001)
+			await this.client.wait(5000)
 			user.roles.add(role);
 			const mostActiveUserMessages = messagesFile.users[mostActiveUser];
             let nevarEmbed;
