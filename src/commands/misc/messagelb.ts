@@ -35,7 +35,7 @@ export default class NevarCommand extends BaseCommand {
         const writers: number = messagesFile?.writer.length || 0;
         const mostActiveUser = Object.keys(messagesFile.users).reduce((a, b) => messagesFile.users[a] > messagesFile.users[b] ? a : b);
 		const mostActiveUserMessages = messagesFile.users[mostActiveUser];
-        const nevarEmbed: EmbedBuilder = this.client.createEmbed("Die aktivsten Leute heute \n {0}", "text", "normal", resultArray.map(([id,count])=> this.client.emotes.arrow + ` <@${id}> | ${count} Messages`).join("\n"));
+        const nevarEmbed: EmbedBuilder = this.client.createEmbed("Die aktivsten Leute heute \n {0}", "text", "normal", resultArray.map(([id,count])=> this.client.emotes.arrow + ` **<@${id}> | ${count}** Messages`).join("\n"));
 return this.interaction.followUp({ embeds: [nevarEmbed] });
     }
 }
