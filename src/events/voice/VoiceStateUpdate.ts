@@ -1,5 +1,6 @@
 import { ChannelType, EmbedBuilder } from "discord.js";
 import BaseClient from "@structures/BaseClient";
+import fs from "fs";
 
 export default class {
 	private client: BaseClient;
@@ -16,6 +17,31 @@ export default class {
 		const { guild } = newMember;
 		const guildData: any = await this.client.findOrCreateGuild(guild.id);
 
+		if (!oldChannel&&newChannel){
+			const voiceFile = JSON.parse(fs.readFileSync("./assets/voice.json"));
+			if (!voiceFile.voiceTime) {
+				voiceFile.voiceTime={}
+			}
+			voiceFile.voiceTime[newMember.id]=Date.now()
+			console.log(voiceFile)
+			fs.writeFileSync("./assets/voice.json", JSON.stringify(voiceFile, null, 2));
+		}
+		if (!newChannel&&oldChannel){
+			const voiceFile = JSON.parse(fs.readFileSync("./assets/voice.json"));
+			if (!voiceFile.voiceTime) {
+				voiceFile.voiceTime={}
+			}
+			const joinDate: any = voiceFile.voiceTime[oldMember.id];
+			const durationInMs: any = Date.now() - joinDate;
+			const Min = durationInMs / 60000
+			if(!voiceFile.userTime){
+				voiceFile.userTime = {};
+			}
+
+			voiceFile.userTime[oldMember.id] = (voiceFile.userTime[oldMember.id] || 0) + Min;
+
+			fs.writeFileSync("./assets/voice.json", JSON.stringify(voiceFile, null, 2));
+		}
 		if (newChannel && newMember.guild) {
 			if (
 				!guildData.settings?.joinToCreate?.enabled ||

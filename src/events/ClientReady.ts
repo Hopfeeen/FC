@@ -73,7 +73,10 @@ export default class {
 				image: "https://cdn.discordapp.com/attachments/1116797977432961197/1176221178550026270/jubel-gladbach.png?ex=656e1456&is=655b9f56&hm=70637599c34cb23defd8aafc093f337a9177bb26558aa9060a95bf335528d138&"
 			})
 		})
-	
+		scheduleJob("00 00 * * *", async (): Promise<void> => {
+			const voiceFile: any= JSON.parse(fs.readFileSync("./assets/voice.json"));
+			fs.writeFileSync("./assets/messages.json", JSON.stringify({}));
+		})
 
 		scheduleJob("00 00 * * *", async (): Promise<void> => {
             const messagesFile: any = JSON.parse(fs.readFileSync("./assets/messages.json"));
@@ -87,6 +90,30 @@ export default class {
 			console.log(user);
 			console.log(mostActiveUser);
 			console.log(role)
+			for(let user of messagesFile.users){
+				if(messagesFile.users[user] > 100*10){
+					const member = guild.members.cache.get(user);
+					member.roles.add("1179181120596738139");
+				}
+			}
+			for(let user of messagesFile.users){
+				if(messagesFile.users[user] > 250*10){
+					const member = guild.members.cache.get(user);
+					member.roles.add("1179181792587153549");
+				}
+			}
+			for(let user of messagesFile.users){
+				if(messagesFile.users[user] > 500*10){
+					const member = guild.members.cache.get(user);
+					member.roles.add("1179181862543958047");
+				}
+			}
+			for(let user of messagesFile.users){
+				if(messagesFile.users[user] > 1000*10){
+					const member = guild.members.cache.get(user);
+					member.roles.add("1179181918537912404");
+				}
+			}
 			role.members.forEach((member: any, i: any) => {
 				setTimeout(() => {
 					member.roles.remove(role);
