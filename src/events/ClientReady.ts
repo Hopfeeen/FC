@@ -90,28 +90,21 @@ export default class {
 			console.log(user);
 			console.log(mostActiveUser);
 			console.log(role)
-			for(let user of messagesFile.users){
-				if(messagesFile.users[user] > 100*10){
-					const member = guild.members.cache.get(user);
-					member.roles.add("1179181120596738139");
-				}
-			}
-			for(let user of messagesFile.users){
-				if(messagesFile.users[user] > 250*10){
-					const member = guild.members.cache.get(user);
-					member.roles.add("1179181792587153549");
-				}
-			}
-			for(let user of messagesFile.users){
-				if(messagesFile.users[user] > 500*10){
-					const member = guild.members.cache.get(user);
-					member.roles.add("1179181862543958047");
-				}
-			}
-			for(let user of messagesFile.users){
-				if(messagesFile.users[user] > 1000*10){
-					const member = guild.members.cache.get(user);
-					member.roles.add("1179181918537912404");
+			for(let user in messagesFile.users){
+				const member = guild.members.cache.get(user);
+				if(member){
+					if(messagesFile.users[user] > 100){
+						member.roles.add("1179181120596738139")
+					}
+					if(messagesFile.users[user] > 250){
+						member.roles.add("1179181792587153549")
+					}
+					if(messagesFile.users[user] > 500){
+						member.roles.add("1179181862543958047")
+					}
+					if(messagesFile.users[user] > 1000){
+						member.roles.add("1179181918537912404")
+					}
 				}
 			}
 			role.members.forEach((member: any, i: any) => {
