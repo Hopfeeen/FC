@@ -5,7 +5,7 @@ import { EmbedBuilder, SlashCommandBuilder } from "discord.js";
 export default class NevarCommand extends BaseCommand {
     public constructor(client: BaseClient) {
         super(client, {
-            name: "JanUwe",
+            name: "januwe",
             description: "The drip",
             localizedDescriptions: {
                 de: "Der drip ist da"
