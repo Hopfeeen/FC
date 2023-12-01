@@ -66,7 +66,7 @@ export default class {
 				scheduledEndTime: gameEndDate,
 				privacyLevel: GuildScheduledEventPrivacyLevel.GuildOnly,
 				entityType: GuildScheduledEventEntityType.External,
-				description: "Das nächste Spiel von Köln",
+				description: "Das nächste Spiel von Köln wird präsentiert von [E leeve lang](https://instagram.com/e.leeve.lang) ! In diesem Event siehst du das nähste Spiel unseres Effzehs! Sei gerne dabei und schreib mit uns während des Events. Klicke auf intressiert um den Spieltag nicht zu verpassen!",
 				entityMetadata: {
 					location: location
 				},
