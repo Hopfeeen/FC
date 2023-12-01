@@ -29,6 +29,10 @@ export default class NevarCommand extends BaseCommand {
 
     private async geilerBot(): Promise<any> {
         const voiceFile: any = JSON.parse(fs.readFileSync("./assets/voice.json"));
+        if(!voiceFile.userTime){
+            const embed: EmbedBuilder = this.client.createEmbed("Es war noch keiner im Voice", "error", "normal");
+            return this.interaction.followUp({ embeds: [embed] });
+        }
         var resultArray = Object.entries(voiceFile.userTime).sort((a,b)=>b[1]-a[1]).slice(0,10)
         console.log(resultArray)
         const IchBinAbsolutDumm: number = voiceFile?.userTime.length || 0;

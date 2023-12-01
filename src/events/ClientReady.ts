@@ -18,6 +18,7 @@ import api from "@api/app";
 import BaseClient from "@structures/BaseClient";
 import axios from "axios";
 import { GuildScheduledEventManager, GuildScheduledEventPrivacyLevel, GuildScheduledEventEntityType  } from "discord.js";
+import guild from "@schemas/Guild";
 
 export default class {
 	public client: BaseClient;
@@ -73,10 +74,30 @@ export default class {
 				image: "https://cdn.discordapp.com/attachments/1116797977432961197/1176221178550026270/jubel-gladbach.png?ex=656e1456&is=655b9f56&hm=70637599c34cb23defd8aafc093f337a9177bb26558aa9060a95bf335528d138&"
 			})
 		})
+
 		scheduleJob("00 00 * * *", async (): Promise<void> => {
-			const voiceFile: any= JSON.parse(fs.readFileSync("./assets/voice.json"));
-			fs.writeFileSync("./assets/messages.json", JSON.stringify({}));
-		})
+			const voiceFile: any= JSON.parse(fs.readFileSync(("./assets/voice.json")));
+			const guild: any = this.client.guilds.cache.get(this.client.config.support["ID"]);
+			for(let user in voiceFile.userTime){
+				const member = guild.members.cache.get(user);
+				if(member){
+					if(voiceFile.userTime[user] > 60*1*10){
+						member.roles.add("1180193937546289192")
+					}
+					if(voiceFile.userTime[user] > 60*2*10){
+						member.roles.add("1180194548366970941")
+					}
+					if(voiceFile.userTime[user] > 60*4*10){
+						member.roles.add("1180194581187395667")
+					}
+					if(voiceFile.userTime[user] > 60*8*10){
+						member.roles.add("1180194611847762020")
+					}
+				}
+			}
+			fs.writeFileSync("./assets/voice.json", JSON.stringify({}));
+		});
+
 
 		scheduleJob("00 00 * * *", async (): Promise<void> => {
             const messagesFile: any = JSON.parse(fs.readFileSync("./assets/messages.json"));
