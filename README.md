@@ -3,45 +3,17 @@
 [![License][license-shield]][license-url]
 [![Stars][stars-shield]][stars-url]
 
-## 🚀 Nevar
-Nevar is a simple, lightweight, and fast discord bot built with discord.js and typescript
+## 🚀 FC Köln Bot
+Hopfens super toller Bot der auf Nevar aufbaut 
 
-[![Banner][banner-url]][website-url]
+[![Banner][banner-url]][discord-url]
+bin zu dumm für Banner egal
 
 
 ## Authors
-- [@1887jonas](https://www.github.com/1887jonas)
-## Run
-Clone the project
-```bash
-  git clone https://github.com/nevar-bot/nevar-ts
-```
+- [@Hopfeeen](https://www.github.com/Hopfeeen) - Entwickler
+- [@1887jonas](https://www.github.com/1887jonas) Nevar Entwickler / Co. Entwickler
 
-Go to the project directory
-```bash
-  cd nevar
-```
-
-Install dependencies
-```bash
-  npm install
-```
-
-Compile typescript and create all necessary files
-```bash
-  npm run build
-  npm run config
-```
-Rename the `config-sample.toml` to `config.toml` and fill in with your data
-
-Start the bot
-```bash
-  npm start // Run in production mode
-  npm run start:dev // Run in development mode
-```
-
-## Feedback
-If you have any feedback, please reach out to us at [hello@nevar.eu](mailto:hello@nevar.eu)
 
 ## 🔗 Links
 [![Discord][discord-shield]][discord-url]
@@ -59,11 +31,11 @@ Distributed under the AGPLv3 License. See `LICENSE` for more information.
 [license-url]:https://choosealicense.com/licenses/agpl-3.0/
 [stars-shield]:https://img.shields.io/github/stars/nevar-bot/nevar.svg?style=for-the-badge
 [stars-url]:https://github.com/nevar-bot/nevar/stargazers
-[banner-url]:https://i.imgur.com/AwsvHQ5.png
+[banner-url]:https://ibb.co/qkCGQh9
 [website-url]:https://nevar.eu
 [instagram-shield]:https://img.shields.io/badge/instagram-E1306C?style=for-the-badge&logo=instagram&logoColor=white
 [instagram-url]:https://instagram.com/nevar_eu
 [x-shield]:https://img.shields.io/badge/X-000000?style=for-the-badge&logo=twitter&logoColor=white
 [x-url]:https://x.com/nevar_eu
 [discord-shield]:https://img.shields.io/badge/discord-5865F2?style=for-the-badge&logo=discord&logoColor=white
-[discord-url]:https://nevar.eu/support
+[discord-url]:[https://nevar.eu/support](https://discord.gg/qcf9P8h84m)https://discord.gg/qcf9P8h84m
