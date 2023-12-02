@@ -31,7 +31,7 @@ Distributed under the AGPLv3 License. See `LICENSE` for more information.
 [license-url]:https://choosealicense.com/licenses/agpl-3.0/
 [stars-shield]:https://img.shields.io/github/stars/nevar-bot/nevar.svg?style=for-the-badge
 [stars-url]:https://github.com/nevar-bot/nevar/stargazers
-[banner-url]:https://ibb.co/qkCGQh9
+[banner-url]:https://i.ibb.co/HnCv8RY/Hopfiihe.png
 [website-url]:https://nevar.eu
 [instagram-shield]:https://img.shields.io/badge/instagram-E1306C?style=for-the-badge&logo=instagram&logoColor=white
 [instagram-url]:https://instagram.com/nevar_eu
