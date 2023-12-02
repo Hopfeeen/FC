@@ -7,7 +7,6 @@
 Hopfens super toller Bot der auf Nevar aufbaut 
 
 [![Banner][banner-url]][discord-url]
-bin zu dumm für Banner egal
 
 
 ## Authors
