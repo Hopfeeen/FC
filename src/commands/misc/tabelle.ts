@@ -35,17 +35,24 @@ export default class TabelleCommand extends BaseCommand {
         let i: number = 0;
         for(let tablePlace of tableData){
             i++;
-            if(tablePlace.shortName === "Leverkusen"){
-                tableString += this.client.emotes.arrow + " " + i + ". Bayer Pillenkusen - " + tablePlace.points + " Punkte" + "\n";
-            }else if(tablePlace.shortName === "Köln") {
-                tableString += " **" + this.client.emotes.arrow + " " + i + ". " + tablePlace.teamName + " - " + tablePlace.points + " Punkte**" + "\n";
-            }else if(tablePlace.shortName === "Gladbach") {
-                tableString += this.client.emotes.arrow + " " + i + ". Kackbach - " + tablePlace.points + " Punkte" + "\n";
-            }else if(tablePlace.shortName === "Leipzig") {
-                tableString += this.client.emotes.arrow + " " + i + ". Dosen - " + tablePlace.points + " Punkte" + "\n";
-            }else{
-                tableString += this.client.emotes.arrow + " " + i + ". " + tablePlace.teamName + " - " + tablePlace.points + " Punkte" + "\n";
+            switch(tablePlace.shortName){
+                case "Leverkusen":
+                    tableString += this.client.emotes.arrow + " " + i + ". Bayer Pillenkusen - " + tablePlace.points + " Punkte" + "\n";
+                    break;
+                case "Köln":
+                    tableString += " **" + this.client.emotes.arrow + " " + i + ". " + tablePlace.teamName + " - " + tablePlace.points + " Punkte**" + "\n";
+                    break;
+                case "Gladbach":
+                    tableString += this.client.emotes.arrow + " " + i + ". Kackbach - " + tablePlace.points + " Punkte" + "\n";
+                    break;
+                case "Leipzig":
+                    tableString += this.client.emotes.arrow + " " + i + ". Dosen - " + tablePlace.points + " Punkte" + "\n";
+                    break;
+                default:
+                    tableString += this.client.emotes.arrow + " " + i + ". " + tablePlace.teamName + " - " + tablePlace.points + " Punkte" + "\n";
+                    break;
             }
+            
             tableString += "Spiele: " + tablePlace.matches + " (" + tablePlace.won + "S, " + tablePlace.draw + "U, " + tablePlace.lost + "N)" + "\n";
             tableString += "Tordifferenz: " + tablePlace.goalDiff + " (" + tablePlace.goals + ":" + tablePlace.opponentGoals + ")" + "\n\n";
         }
