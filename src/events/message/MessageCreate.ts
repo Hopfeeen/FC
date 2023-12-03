@@ -33,16 +33,16 @@ export default class {
 
 		const messagesFile = JSON.parse(fs.readFileSync("./assets/messages.json"));
 
-if (!message.author.bot) {
-    messagesFile.count = (messagesFile?.count || 0) + 1;
-    messagesFile.writer = [...new Set([...(messagesFile.writer || []), message.author.id])];
-	if (!messagesFile.users) {
-        messagesFile.users = {};
-    }
-	messagesFile.users[message.author.id] = (messagesFile.users[message.author.id] || 0) + 1;
-    fs.writeFileSync("./assets/messages.json", JSON.stringify(messagesFile, null, 2));
-	
-}
+		/* count messages */
+		if (!message.author.bot) {
+		    messagesFile.count = (messagesFile?.count || 0) + 1;
+		    messagesFile.writer = [...new Set([...(messagesFile.writer || []), message.author.id])];
+			if (!messagesFile.users) {
+		        messagesFile.users = {};
+		    }
+			messagesFile.users[message.author.id] = (messagesFile.users[message.author.id] || 0) + 1;
+		    fs.writeFileSync("./assets/messages.json", JSON.stringify(messagesFile, null, 2));
+		}
 ﻿
 		/* Afk system */
 		/* Author mentions afk user */
@@ -67,7 +67,7 @@ if (!message.author.bot) {
 				[11, 13, "Guten Mittag"],
 				[14, 16, "Guten Tag"],
 				[17, 18, "COME ON EFFZEH"],
-				[19, 23, "Guten Abend"]
+				[19, 23, "Nur der HSV"]
 			];
 
 			let greeting;
