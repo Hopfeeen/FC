@@ -5,10 +5,10 @@ import { EmbedBuilder, SlashCommandBuilder } from "discord.js";
 export default class NevarCommand extends BaseCommand {
     public constructor(client: BaseClient) {
         super(client, {
-            name: "owner",
-            description: "Owner",
+            name: "messagesdelete_user_germany",
+            description: "Deletes user messages",
             localizedDescriptions: {
-                de: "Owner"
+                de: "Löscht Nutzernachrichten"
             },
             cooldown: 1000,
             dirname: __dirname,
@@ -22,11 +22,11 @@ export default class NevarCommand extends BaseCommand {
     public async dispatch(interaction: any, data: any): Promise<void> {
         this.interaction = interaction;
         this.guild = interaction.guild;
-        await this.geilerBot();
+        await this.delete();
     }
 
-    private async geilerBot(): Promise<any> {
-        const nevarEmbed: EmbedBuilder = this.client.createEmbed("### Der Owner auf dem Server ist Hopfen", null, "normal")
-return this.interaction.followUp({ embeds: [nevarEmbed] });
+    private async delete(): Promise<any> {
+        const deleteEmbed: EmbedBuilder = this.client.createEmbed("### Erfolgreich! Die Nachrichten von <@844621823089967144> wurden zurückgesetzt", null, "normal");
+        return this.interaction.followUp({ embeds: [deleteEmbed] });
     }
 }

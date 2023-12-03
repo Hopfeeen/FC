@@ -11,7 +11,7 @@ export default class TopicCommand extends BaseCommand {
 			localizedDescriptions: {
 				de: "Sendet ein zufälliges Thema für eine Unterhaltung"
 			},
-			cooldown: 20000,
+			cooldown: 20 * 1000,
 			dirname: __dirname,
 			slashCommand: {
 				addCommand: true,

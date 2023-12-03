@@ -45,21 +45,32 @@ export default class {
 		/* Initiate presence handler */
 		handlePresence(client);
 
+		/* Create Bundesliga game events */
 		scheduleJob("0 0 * * *", async (): Promise<void> => {
+			/* get next game */
 			const game: any = await axios.get("https://api.openligadb.de/getnextmatchbyleagueteam/4608/65", {
   				validateStatus: (status: number): boolean => true
 			});
 			const gameData: any = game.data;
+
+			/* get guild and initiate guild event manager */
 			const guild: any = this.client.guilds.cache.get(this.client.config.support["ID"]);
 			const eventManager: GuildScheduledEventManager = new GuildScheduledEventManager(guild);
+
+			/* get start and end date */
 			const gameStartDate: any = new Date(gameData.matchDateTimeUTC);
 			const gameEndDate: any = new Date(gameData.matchDateTimeUTC);
 			gameEndDate.setMinutes(gameEndDate.getMinutes() + 120);
+
+			/* get location */
 			let location: string = "Unbekannt";
 			if(gameData.location) location = gameData.location?.locationStadium + " - " + gameData.location?.locationCity;
+
+			/* check if event already exists */
 			const events: any = await eventManager.fetch().catch(() => {});
-			console.log(events)
 			if(events && events?.find(event => event.name === "⚽ | " + gameData.team1.teamName + " vs. " + gameData.team2.teamName)) return;
+
+			/* create game event */
 			await eventManager.create({
 				name: "⚽ | " + gameData.team1.teamName + " vs. " + gameData.team2.teamName,
 				scheduledStartTime: gameStartDate,
@@ -71,13 +82,19 @@ export default class {
 					location: location
 				},
 				reason: "FC Spiel",
-				image: "https://cdn.discordapp.com/attachments/1116797977432961197/1176221178550026270/jubel-gladbach.png?ex=656e1456&is=655b9f56&hm=70637599c34cb23defd8aafc093f337a9177bb26558aa9060a95bf335528d138&"
+				image: "https://cdn.discordapp.com/attachments/1116797977432961197/1176221178550026270/jubel-gladbach.png?ex=656e1456&is=655b9f56&hm=70637599c34cb23defd8aafc093f337a9177bb26558aa9060a95bf335528d138"
 			})
 		})
 
-		scheduleJob("00 00 * * *", async (): Promise<void> => {
+		/* Evaluate voice statistics */
+		scheduleJob("0 0 * * *", async (): Promise<void> => {
+			/* get voice statistics */
 			const voiceFile: any= JSON.parse(fs.readFileSync(("./assets/voice.json")));
+
+			/* get guild */
 			const guild: any = this.client.guilds.cache.get(this.client.config.support["ID"]);
+
+			/* add roles to users */
 			for(let user in voiceFile.userTime){
 				const member = guild.members.cache.get(user);
 				if(member){
@@ -95,82 +112,88 @@ export default class {
 					}
 				}
 			}
-			fs.writeFileSync("./assets/voice.json", JSON.stringify({}));
+
+			/* reset file */
+			voiceFile.userTime = {};
+			fs.writeFileSync("./assets/voice.json", JSON.stringify(voiceFile));
 		});
 
 
-		scheduleJob("00 00 * * *", async (): Promise<void> => {
-            const messagesFile: any = JSON.parse(fs.readFileSync("./assets/messages.json"));
-            const count: number = messagesFile?.count || 0;
-            const writers: number = messagesFile?.writer.length || 0;
+		/* evaluate message statistics */
+		scheduleJob("0 0 * * *", async (): Promise<void> => {
+			/* get message statistics */
+	        	const messagesFile: any = JSON.parse(fs.readFileSync("./assets/messages.json"));
+	            	const count: number = messagesFile?.count || 0;
+	            	const writers: number = messagesFile?.writer.length || 0;
 			const mostActiveUser = Object.keys(messagesFile.users).reduce((a, b) => messagesFile.users[a] > messagesFile.users[b] ? a : b);
+
+			/* get guild */
 			const guild: any = this.client.guilds.cache.get(this.client.config.support["ID"]);
+
+			/* fetch most active user */
 			const user: any = await guild.members.fetch(mostActiveUser).catch(() => {});
 			const role: any = guild.roles.cache.get("1176251297138225214");
-			console.log(guild);
-			console.log(user);
-			console.log(mostActiveUser);
-			console.log(role)
+
+			/* add roles to users */
 			for(let user in messagesFile.users){
 				const member = guild.members.cache.get(user);
-				if(member){
-					if(messagesFile.users[user] > 100){
-						member.roles.add("1179181120596738139")
-					}
-					if(messagesFile.users[user] > 250){
-						member.roles.add("1179181792587153549")
-					}
-					if(messagesFile.users[user] > 500){
-						member.roles.add("1179181862543958047")
-					}
-					if(messagesFile.users[user] > 1000){
-						member.roles.add("1179181918537912404")
-					}
+				if(!member) continue;
+				if(messagesFile.users[user] > 100){
+					member.roles.add("1179181120596738139")
+				}else if(messagesFile.users[user] > 250){
+					member.roles.add("1179181792587153549")
+				}else if(messagesFile.users[user] > 500){
+					member.roles.add("1179181862543958047")
+				}else if(messagesFile.users[user] > 1000){
+					member.roles.add("1179181918537912404")
 				}
 			}
+
+			/* remove Pokalsieger role from all users */
 			role.members.forEach((member: any, i: any) => {
 				setTimeout(() => {
 					member.roles.remove(role);
 				}, i * 1000);
 			});
 			await this.client.wait(5000)
+
+			/* add Pokalsieger role to most active user */
 			user.roles.add(role);
+
+			/* send message */
 			const mostActiveUserMessages = messagesFile.users[mostActiveUser];
-            let nevarEmbed;
+            		let messagesEmbed;
 			if (count < 250){
-				nevarEmbed = this.client.createEmbed("Ein depremierender Tag für unseren Server! Heute wurden leider nur **{0} Messages** geschrieben. Dabei waren **{1} Menschen** beteiligt. Der aktivste User war <@{2}>! Danke für eure Aktivität <3", null, "normal", count, writers, mostActiveUser);
-				nevarEmbed.setImage("https://cdn.discordapp.com/attachments/1116797977432961197/1175891378211926066/HectorMessages0-100.png?ex=656ce12f&is=655a6c2f&hm=f9f22670e79a5b7181c74326ba12bf82653f0092be42e4f107145ea23173b796&");
+				messagesEmbed = this.client.createEmbed("Ein depremierender Tag für unseren Server! Heute wurden leider nur **{0} Messages** geschrieben. Dabei waren **{1} Menschen** beteiligt. Der aktivste User war <@{2}>! Danke für eure Aktivität <3", null, "normal", count, writers, mostActiveUser);
+				messagesEmbed.setImage("https://cdn.discordapp.com/attachments/1116797977432961197/1175891378211926066/HectorMessages0-100.png?ex=656ce12f&is=655a6c2f&hm=f9f22670e79a5b7181c74326ba12bf82653f0092be42e4f107145ea23173b796&");
+			}else if (count > 250 && count < 750){
+				messagesEmbed = this.client.createEmbed("Hey, morgen wirds besser! Heute wurden **{0} Messages** geschrieben. Dabei haben **{1} Menschen** geschrieben. Dabei war <@{2}> der aktivste! Danke für eure Aktivität <3 ", null, "normal", count, writers, mostActiveUser);
+				messagesEmbed.setImage("https://cdn.discordapp.com/attachments/1116797977432961197/1175892447000281179/8cfb1468-4d89-4af2-9657-77295ce53c32.png?ex=656ce22e&is=655a6d2e&hm=56dabc7036a13db119a378ff06cb22f6b75741642364b1bb734cb1741f2cdb4a&")
+			}else if (count < 1500 && count > 750){
+				messagesEmbed = this.client.createEmbed("Klasse! Heute wurden **{0} Messages** von **{1} Personen** geschrieben! Der aktivste User war <@{2}>! Danke für eure Aktivität <3", null, "normal", count, writers, mostActiveUser);
+				messagesEmbed.setImage("https://cdn.discordapp.com/attachments/1116797977432961197/1175893445932499065/image-fotor-20231119211945.png?ex=656ce31c&is=655a6e1c&hm=0b60780e61cbbe8a053e4a483a5b8d869f94090231fc247196e0b3e2cacc5789&")
+			}else if (count < 3000 && count > 1500){
+				messagesEmbed = this.client.createEmbed("Sehr Stark!!! Alleine heute wurden **{0} Messages** geschrieben. Dabei haben **{1} Leute** geholfen! Der aktivste User war <@{2}>! Vielen Dank für eure Aktivität <3", null, "normal", count, writers, mostActiveUser);
+				messagesEmbed.setImage("https://cdn.discordapp.com/attachments/1116797977432961197/1175894350564180038/team.png?ex=656ce3f4&is=655a6ef4&hm=6269796f6c039a58475ce50a4507ccea15a5e7f99aca2c3f769113e8a204535f&")
+			}else if (count > 3000){
+				messagesEmbed = this.client.createEmbed("Wenn selbst Hennes stolz ist, dann wisst ihr, ihr habts geschafft! Heute wurden **{0} Messages** von insgesamt **{1} Menschen** geschrieben! Der aktivste User war <@{2}> Vielen Dank für eure Aktivität <3", null, "normal", count, writers, mostActiveUser);
+				messagesEmbed.setImage("https://cdn.discordapp.com/attachments/1116797977432961197/1175895372548288613/mit-hipsterbaertchen-voll-im.png?ex=656ce4e7&is=655a6fe7&hm=d7c6a8cf18dae2245231c243fc65323b0a2afaee96083a088690ae30e169db55&")
 			}
-			if (count > 250 && count < 750){
-				nevarEmbed = this.client.createEmbed("Hey, morgen wirds besser! Heute wurden **{0} Messages** geschrieben. Dabei haben **{1} Menschen** geschrieben. Dabei war <@{2}> der aktivste! Danke für eure Aktivität <3 ", null, "normal", count, writers, mostActiveUser);
-				nevarEmbed.setImage("https://cdn.discordapp.com/attachments/1116797977432961197/1175892447000281179/8cfb1468-4d89-4af2-9657-77295ce53c32.png?ex=656ce22e&is=655a6d2e&hm=56dabc7036a13db119a378ff06cb22f6b75741642364b1bb734cb1741f2cdb4a&")
-			}
-			if (count < 1500 && count > 750){
-				nevarEmbed = this.client.createEmbed("Klasse! Heute wurden **{0} Messages** von **{1} Personen** geschrieben! Der aktivste User war <@{2}>! Danke für eure Aktivität <3", null, "normal", count, writers, mostActiveUser);
-				nevarEmbed.setImage("https://cdn.discordapp.com/attachments/1116797977432961197/1175893445932499065/image-fotor-20231119211945.png?ex=656ce31c&is=655a6e1c&hm=0b60780e61cbbe8a053e4a483a5b8d869f94090231fc247196e0b3e2cacc5789&")
-			}
-			if (count < 3000 && count > 1500){
-				nevarEmbed = this.client.createEmbed("Sehr Stark!!! Alleine heute wurden **{0} Messages** geschrieben. Dabei haben **{1} Leute** geholfen! Der aktivste User war <@{2}>! Vielen Dank für eure Aktivität <3", null, "normal", count, writers, mostActiveUser);
-				nevarEmbed.setImage("https://cdn.discordapp.com/attachments/1116797977432961197/1175894350564180038/team.png?ex=656ce3f4&is=655a6ef4&hm=6269796f6c039a58475ce50a4507ccea15a5e7f99aca2c3f769113e8a204535f&")
-			}
-			if (count > 3000){
-				nevarEmbed = this.client.createEmbed("Wenn selbst Hennes stolz ist, dann wisst ihr, ihr habts geschafft! Heute wurden **{0} Messages** von insgesamt **{1} Menschen** geschrieben! Der aktivste User war <@{2}> Vielen Dank für eure Aktivität <3", null, "normal", count, writers, mostActiveUser);
-				nevarEmbed.setImage("https://cdn.discordapp.com/attachments/1116797977432961197/1175895372548288613/mit-hipsterbaertchen-voll-im.png?ex=656ce4e7&is=655a6fe7&hm=d7c6a8cf18dae2245231c243fc65323b0a2afaee96083a088690ae30e169db55&")
-			}
-            const channel: any = guild.channels.cache.get("813887099065073714");
-            channel.send({embeds:[nevarEmbed]});
+            		const channel: any = guild.channels.cache.get("813887099065073714");
+            		channel.send({embeds:[nevarEmbed]});
 
+			/* reset messages file */
+            		fs.writeFileSync("./assets/messages.json", JSON.stringify({}));
+        	});
 
-            console.log(count + " Nachrichten, " + writers + " Schreiber");
-            fs.writeFileSync("./assets/messages.json", JSON.stringify({}));
-        });
-
+		/* Selke Samstag */
 		scheduleJob("0 0 * * 6", async (): Promise<void> => {
+			/* get guild */
 			const guild: any = this.client.guilds.cache.get(this.client.config.support["ID"]);
 			const channel: any = guild.channels.cache.get("813887099065073714");
-			const schonlauSamstag: any = this.client.createEmbed("Es ist wieder soweit... **Es ist...**", null, "normal");
-			schonlauSamstag.setImage("https://cdn.discordapp.com/attachments/1116797977432961197/1175857152598999192/SelkeSamstag.png?ex=656cc14f&is=655a4c4f&hm=9ae60215fa91e52d215ef7e1888034698fcbb53ebf1e23118d3ac9ee74c71967&");
-			channel.send({ embeds: [schonlauSamstag] });
+			const selkeSamstagEmbed: any = this.client.createEmbed("Es ist wieder soweit... **Es ist...**", null, "normal");
+			selkeSamstagEmbed.setImage("https://cdn.discordapp.com/attachments/1116797977432961197/1175857152598999192/SelkeSamstag.png?ex=656cc14f&is=655a4c4f&hm=9ae60215fa91e52d215ef7e1888034698fcbb53ebf1e23118d3ac9ee74c71967&");
+			channel.send({ embeds: [selkeSamstagEmbed] });
 		  });
 
 		/* Initiate dashboard */

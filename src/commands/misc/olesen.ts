@@ -2,7 +2,7 @@ import BaseCommand from "@structures/BaseCommand";
 import BaseClient from "@structures/BaseClient";
 import { EmbedBuilder, SlashCommandBuilder } from "discord.js";
 
-export default class NevarCommand extends BaseCommand {
+export default class OlesenCommand extends BaseCommand {
     public constructor(client: BaseClient) {
         super(client, {
             name: "olesen",
@@ -22,12 +22,12 @@ export default class NevarCommand extends BaseCommand {
     public async dispatch(interaction: any, data: any): Promise<void> {
         this.interaction = interaction;
         this.guild = interaction.guild;
-        await this.geilerBot();
+        await this.olesen();
     }
 
-    private async geilerBot(): Promise<any> {
-        const nevarEmbed: EmbedBuilder = this.client.createEmbed("### Ist das der echte? JA Es ist...", null, "normal");
-nevarEmbed.setImage("https://cdn.discordapp.com/attachments/1116797977432961197/1175852167047958628/OLESEEEN.png?ex=656cbcaa&is=655a47aa&hm=3e6b05f68da7d9cac63bda4b41015bc05f37bc8f84096a319933bd1ed67ec237&");
-return this.interaction.followUp({ embeds: [nevarEmbed] });
+    private async olesen(): Promise<any> {
+        const olesenEmbed: EmbedBuilder = this.client.createEmbed("### Ist das der echte? JA Es ist...", null, "normal");
+        olesenEmbed.setImage("https://cdn.discordapp.com/attachments/1116797977432961197/1175852167047958628/OLESEEEN.png?ex=656cbcaa&is=655a47aa&hm=3e6b05f68da7d9cac63bda4b41015bc05f37bc8f84096a319933bd1ed67ec237");
+        return this.interaction.followUp({ embeds: [olesenEmbed] });
     }
 }
