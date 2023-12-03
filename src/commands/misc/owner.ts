@@ -2,7 +2,7 @@ import BaseCommand from "@structures/BaseCommand";
 import BaseClient from "@structures/BaseClient";
 import { EmbedBuilder, SlashCommandBuilder } from "discord.js";
 
-export default class NevarCommand extends BaseCommand {
+export default class OwnerCommand extends BaseCommand {
     public constructor(client: BaseClient) {
         super(client, {
             name: "owner",
