@@ -120,7 +120,7 @@ export default class {
 
 
 		/* evaluate message statistics */
-		scheduleJob("0 0 * * *", async (): Promise<void> => {
+		scheduleJob("3 0 * * *", async (): Promise<void> => {
 			/* get message statistics */
 	        	const messagesFile: any = JSON.parse(fs.readFileSync("./assets/messages.json"));
 	            	const count: number = messagesFile?.count || 0;
@@ -180,7 +180,7 @@ export default class {
 				messagesEmbed.setImage("https://cdn.discordapp.com/attachments/1116797977432961197/1175895372548288613/mit-hipsterbaertchen-voll-im.png?ex=656ce4e7&is=655a6fe7&hm=d7c6a8cf18dae2245231c243fc65323b0a2afaee96083a088690ae30e169db55&")
 			}
             		const channel: any = guild.channels.cache.get("813887099065073714");
-            		channel.send({embeds:[nevarEmbed]});
+            		channel.send({embeds:[messagesEmbed]});
 
 			/* reset messages file */
             		fs.writeFileSync("./assets/messages.json", JSON.stringify({}));
