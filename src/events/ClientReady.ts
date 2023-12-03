@@ -120,7 +120,7 @@ export default class {
 
 
 		/* evaluate message statistics */
-		scheduleJob("3 0 * * *", async (): Promise<void> => {
+		scheduleJob("0 0 * * *", async (): Promise<void> => {
 			/* get message statistics */
 	        	const messagesFile: any = JSON.parse(fs.readFileSync("./assets/messages.json"));
 	            	const count: number = messagesFile?.count || 0;
