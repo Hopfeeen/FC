@@ -22,11 +22,11 @@ export default class NevarCommand extends BaseCommand {
     public async dispatch(interaction: any, data: any): Promise<void> {
         this.interaction = interaction;
         this.guild = interaction.guild;
-        await this.geilerBot();
+        await this.owner();
     }
 
-    private async geilerBot(): Promise<any> {
-        const nevarEmbed: EmbedBuilder = this.client.createEmbed("### Der Owner auf dem Server ist Hopfen", null, "normal")
-return this.interaction.followUp({ embeds: [nevarEmbed] });
+    private async owner(): Promise<any> {
+        const ownerEmbed: EmbedBuilder = this.client.createEmbed("### Der Owner auf dem Server ist Hopfen", null, "normal")
+        return this.interaction.followUp({ embeds: [ownerEmbed] });
     }
 }
