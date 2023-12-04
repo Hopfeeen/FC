@@ -83,7 +83,7 @@ export default class {
 				},
 				reason: "FC Spiel",
 				image: "https://cdn.discordapp.com/attachments/1116797977432961197/1176221178550026270/jubel-gladbach.png?ex=656e1456&is=655b9f56&hm=70637599c34cb23defd8aafc093f337a9177bb26558aa9060a95bf335528d138"
-			})
+			}).catch((): void => {});
 		})
 
 		/* Evaluate voice statistics */
