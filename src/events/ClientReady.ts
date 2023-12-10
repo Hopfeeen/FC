@@ -1,7 +1,7 @@
 import * as fs from "fs";
 import { scheduleJob } from "node-schedule";
 import moment from "moment";
-import { Collection, ComponentType, Guild, Invite } from "discord.js";
+import { Collection, ComponentType, Guild, Invite, AttachmentBuilder } from "discord.js";
 
 import handlePresence from "@handlers/presence";
 import registerInteractions from "@handlers/registerInteractions";
@@ -163,22 +163,23 @@ export default class {
 
 			/* send message */
 			const mostActiveUserMessages = messagesFile.users[mostActiveUser];
+			const file = new AttachmentBuilder("../../assets/currentBanner.png");
             		let messagesEmbed;
 			if (count < 250){
 				messagesEmbed = this.client.createEmbed("Ein depremierender Tag für unseren Server! Heute wurden leider nur **{0} Messages** geschrieben. Dabei waren **{1} Menschen** beteiligt. Der aktivste User war <@{2}>! Danke für eure Aktivität <3", null, "normal", count, writers, mostActiveUser);
-				messagesEmbed.setImage("https://cdn.discordapp.com/attachments/1116797977432961197/1175891378211926066/HectorMessages0-100.png?ex=656ce12f&is=655a6c2f&hm=f9f22670e79a5b7181c74326ba12bf82653f0092be42e4f107145ea23173b796&");
+				messagesEmbed.setImage("attachment://currentBanner.png");
 			}else if (count > 250 && count < 750){
 				messagesEmbed = this.client.createEmbed("Hey, morgen wirds besser! Heute wurden **{0} Messages** geschrieben. Dabei haben **{1} Menschen** geschrieben. Dabei war <@{2}> der aktivste! Danke für eure Aktivität <3 ", null, "normal", count, writers, mostActiveUser);
-				messagesEmbed.setImage("https://cdn.discordapp.com/attachments/1116797977432961197/1175892447000281179/8cfb1468-4d89-4af2-9657-77295ce53c32.png?ex=656ce22e&is=655a6d2e&hm=56dabc7036a13db119a378ff06cb22f6b75741642364b1bb734cb1741f2cdb4a&")
+				messagesEmbed.setImage("attachment://currentBanner.png")
 			}else if (count < 1500 && count > 750){
 				messagesEmbed = this.client.createEmbed("Klasse! Heute wurden **{0} Messages** von **{1} Personen** geschrieben! Der aktivste User war <@{2}>! Danke für eure Aktivität <3", null, "normal", count, writers, mostActiveUser);
-				messagesEmbed.setImage("https://cdn.discordapp.com/attachments/1116797977432961197/1175893445932499065/image-fotor-20231119211945.png?ex=656ce31c&is=655a6e1c&hm=0b60780e61cbbe8a053e4a483a5b8d869f94090231fc247196e0b3e2cacc5789&")
+				messagesEmbed.setImage("attachment://currentBanner.png")
 			}else if (count < 3000 && count > 1500){
 				messagesEmbed = this.client.createEmbed("Sehr Stark!!! Alleine heute wurden **{0} Messages** geschrieben. Dabei haben **{1} Leute** geholfen! Der aktivste User war <@{2}>! Vielen Dank für eure Aktivität <3", null, "normal", count, writers, mostActiveUser);
-				messagesEmbed.setImage("https://cdn.discordapp.com/attachments/1116797977432961197/1175894350564180038/team.png?ex=656ce3f4&is=655a6ef4&hm=6269796f6c039a58475ce50a4507ccea15a5e7f99aca2c3f769113e8a204535f&")
+				messagesEmbed.setImage("attachment://currentBanner.png")
 			}else if (count > 3000){
 				messagesEmbed = this.client.createEmbed("Wenn selbst Hennes stolz ist, dann wisst ihr, ihr habts geschafft! Heute wurden **{0} Messages** von insgesamt **{1} Menschen** geschrieben! Der aktivste User war <@{2}> Vielen Dank für eure Aktivität <3", null, "normal", count, writers, mostActiveUser);
-				messagesEmbed.setImage("https://cdn.discordapp.com/attachments/1116797977432961197/1175895372548288613/mit-hipsterbaertchen-voll-im.png?ex=656ce4e7&is=655a6fe7&hm=d7c6a8cf18dae2245231c243fc65323b0a2afaee96083a088690ae30e169db55&")
+				messagesEmbed.setImage("attachment://currentBanner.png")
 			}
             		const channel: any = guild.channels.cache.get("813887099065073714");
             		channel.send({embeds:[messagesEmbed]});
