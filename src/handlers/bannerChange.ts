@@ -9,6 +9,7 @@ async function changeBanner(client:BaseClient):Promise<void>{
     const canvas: any = createCanvas(image.width, image.height);
     const ctx: any = canvas.getContext("2d");
     const messagesFile: any = JSON.parse(fs.readFileSync("./assets/messages.json"));
+    if(!messagesFile.users) return
     const resultArray = Object.entries(messagesFile.users).sort((a, b) => b[1] - a[1]).slice(0, 3);
     ctx.drawImage(image, 0, 0, image.width, image.height);
     ctx.font = "45px Arial";
