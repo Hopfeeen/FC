@@ -33,7 +33,7 @@ async function changeBanner(client:BaseClient):Promise<void>{
     }
 
     const buffer: any = canvas.toBuffer("image/png");
-    fs.writeFileSync("./assets/test.png", buffer);
+    fs.writeFileSync("./assets/currentBanner.png", buffer);
     guild.setBanner(buffer).catch((e) => {console.log(e)});
 }
 export default{
