@@ -6,6 +6,7 @@ import { Collection, ComponentType, Guild, Invite } from "discord.js";
 import handlePresence from "@handlers/presence";
 import registerInteractions from "@handlers/registerInteractions";
 import TOPGG from "@helpers/Top.gg";
+import changeBanner from "@handlers/bannerChange";
 import unbanMembers from "@handlers/unbanMembers";
 import unmuteMembers from "@handlers/unmuteMembers";
 import remindMembers from "@handlers/remindMembers";
@@ -208,6 +209,7 @@ export default class {
 		twitchNotifier.init(client);
 		endGiveaways.init(client);
 		updatePolls.init(client);
+		changeBanner.init(client);
 		if (config.api["ENABLED"]) api.init(client);
 
 		/* Support server stats channels */
