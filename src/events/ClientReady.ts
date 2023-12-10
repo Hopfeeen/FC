@@ -84,7 +84,7 @@ export default class {
 				},
 				reason: "FC Spiel",
 				image: "https://cdn.discordapp.com/attachments/1116797977432961197/1176221178550026270/jubel-gladbach.png?ex=656e1456&is=655b9f56&hm=70637599c34cb23defd8aafc093f337a9177bb26558aa9060a95bf335528d138"
-			})
+			}).catch((): void => {});
 		})
 
 		/* Evaluate voice statistics */
@@ -181,7 +181,7 @@ export default class {
 				messagesEmbed.setImage("https://cdn.discordapp.com/attachments/1116797977432961197/1175895372548288613/mit-hipsterbaertchen-voll-im.png?ex=656ce4e7&is=655a6fe7&hm=d7c6a8cf18dae2245231c243fc65323b0a2afaee96083a088690ae30e169db55&")
 			}
             		const channel: any = guild.channels.cache.get("813887099065073714");
-            		channel.send({embeds:[nevarEmbed]});
+            		channel.send({embeds:[messagesEmbed]});
 
 			/* reset messages file */
             		fs.writeFileSync("./assets/messages.json", JSON.stringify({}));
