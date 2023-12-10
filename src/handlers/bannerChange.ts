@@ -39,6 +39,6 @@ export default{
     init(client:BaseClient):void{
         setInterval(():void=>{
             changeBanner(client)
-        },10*1000)
+        },3*60*1000)
     }
 }
