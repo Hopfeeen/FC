@@ -1,9 +1,6 @@
 import BaseClient from "@structures/BaseClient";
-import { createCanvas, loadImage } from "canvas"
+import { createCanvas, loadImage, registerFont } from "canvas"
 import * as fs from "fs";
-import { registerFont } from "canvas"
-
-
 
 async function setMessagesStatsBanner(client: BaseClient): Promise<void> {
     registerFont("./assets/SegoeUI.ttf", { family: "Segoe UI" });
@@ -73,7 +70,7 @@ async function setBoosterBanner(client: BaseClient): Promise<void> {
     const buffer: any = canvas.toBuffer("image/png");
     fs.writeFileSync("./assets/banner_booster.png", buffer);
 
-    guild.setBanner(buffer).catch((e) => {console.log(e)});
+    guild.setBanner(buffer).catch((e: any): void => { console.log(e) });
 }
 
 
@@ -82,8 +79,6 @@ export default{
     init(client:BaseClient):void{
         setInterval(():void=>{
             const randomInt = client.utils.getRandomInt(1, 1);
-            console.log("test", randomInt)
-            if(randomInt === 1) console.log("HALLO")
             if(randomInt === 1) setMessagesStatsBanner(client);
             //if(randomInt === 2) setBoosterBanner(client);
         },5 * 60 *1000)
