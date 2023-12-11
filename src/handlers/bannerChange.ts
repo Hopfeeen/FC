@@ -5,7 +5,7 @@ import { registerFont } from "canvas"
 registerFont("./assets/SegoeUI.ttf", { family: "Segoe UI" });
 
 
-async function changeBanner(client:BaseClient):Promise<void>{
+async function setMessagesStatsBanner(client: BaseClient): Promise<void> {
     /* get guild */
     const guild: any = client.guilds.cache.get(client.config.support["ID"]);
     const image: any = await loadImage("./assets/aktivsteuserbanner.png");
@@ -37,12 +37,52 @@ async function changeBanner(client:BaseClient):Promise<void>{
 
     const buffer: any = canvas.toBuffer("image/png");
     fs.writeFileSync("./assets/currentBanner.png", buffer);
+
     guild.setBanner(buffer).catch((e) => {console.log(e)});
 }
+
+async function setBoosterBanner(client: BaseClient): Promise<void> {
+    /* get guild */
+    const guild: any = client.guilds.cache.get(client.config.support["ID"]);
+    const image: any = await loadImage("./assets/ServerBoostBannerVORLAGE.png");
+    const canvas: any = createCanvas(image.width, image.height);
+    const ctx: any = canvas.getContext("2d");
+
+    const boostCount: any = guild.premiumSubscriptionCount;
+
+    let boosters: any[] = [];
+    guild.members.fetch().then((fetchedMembers: any): void => {
+        boosters = fetchedMembers.filter((member: any): boolean => member.premiumSince !== null);
+    });
+
+    const randomBooster = boosters[Math.floor(Math.random()*boosters.length)];
+
+    ctx.drawImage(image, 0, 0, image.width, image.height);
+    ctx.font = "45px SegoeUI";
+    ctx.fillStyle = "black";
+
+    ctx.fillText(randomBooster?.displayName || "Unbekannt", 70, 205);
+
+
+    ctx.font = "80px SegoeUI";
+    ctx.fillText(boostCount || 0, 140, 370);
+
+    ctx.fillText(String(boosters.length || 0), 460, 370);
+
+    const buffer: any = canvas.toBuffer("image/png");
+    fs.writeFileSync("./assets/newBannertest.png", buffer);
+
+    guild.setBanner(buffer).catch((e) => {console.log(e)});
+}
+
+
+
 export default{
     init(client:BaseClient):void{
         setInterval(():void=>{
-            changeBanner(client)
+            const randomInt = client.utils.getRandomInt(1, 1);
+            if(randomInt === 1) setMessagesStatsBanner(client);
+            if(randomInt === 2) setBoosterBanner(client);
         },3*60*1000)
     }
 }
