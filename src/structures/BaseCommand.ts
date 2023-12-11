@@ -25,11 +25,13 @@ export default class BaseCommand {
 			cooldown = 0,
 			slashCommand = {
 				addCommand: true,
-				data: [],
-			},
+				data: []
+			}
 		} = options;
 
-		const category: string = (dirname as string).split(path.sep)[parseInt(String((dirname as string).split(path.sep).length - 1), 10)]
+		const category: string = (dirname as string).split(path.sep)[
+			parseInt(String((dirname as string).split(path.sep).length - 1), 10)
+		];
 
 		this.client = client;
 		this.conf = { memberPermissions, botPermissions, nsfw, ownerOnly, staffOnly, cooldown };
@@ -39,7 +41,8 @@ export default class BaseCommand {
 
 	protected translate(key: string, args?: any, isFullPath?: boolean): string {
 		let languageKey: string = key;
-		if (!isFullPath) languageKey = `${this.help.category.toLowerCase()}/${this.help.name}:${key}`;
+		if (!isFullPath)
+			languageKey = `${this.help.category.toLowerCase()}/${this.help.name}:${key}`;
 		if (!this.guild) return "Missing guild";
 		return this.guild.translate(languageKey, args);
 	}

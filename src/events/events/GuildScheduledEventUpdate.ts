@@ -39,13 +39,13 @@ export default class {
 					(oldScheduledEvent.scheduledStartTimestamp
 						? moment(oldScheduledEvent.scheduledStartTimestamp).format(
 								"DD.MM.YYYY HH:mm"
-						  )
+							)
 						: "/") +
 					"~~ **" +
 					(newScheduledEvent.scheduledStartTimestamp
 						? moment(newScheduledEvent.scheduledStartTimestamp).format(
 								"DD.MM.YYYY HH:mm"
-						  )
+							)
 						: "/") +
 					"**"
 			);

@@ -212,7 +212,7 @@ export default class BaseClient extends DiscordClient {
 			: await this.membersData.findOne({
 					id: memberID,
 					guildID: guildID
-			  });
+				});
 	}
 
 	async deleteMember(memberID: string, guildID: string): Promise<any> {

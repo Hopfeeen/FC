@@ -182,9 +182,8 @@ export default class GiveawayCommand extends BaseCommand {
 
 	private async reroll(): Promise<void> {
 		const id: string = this.interaction.options.getString("id");
-		const rerollGiveaway: boolean | Object = await this.client.giveawayManager.rerollGiveaway(
-			id
-		);
+		const rerollGiveaway: boolean | Object =
+			await this.client.giveawayManager.rerollGiveaway(id);
 		if (rerollGiveaway) {
 			const successEmbed: EmbedBuilder = this.client.createEmbed(
 				"Das Gewinnspiel wurde neu ausgelost.",

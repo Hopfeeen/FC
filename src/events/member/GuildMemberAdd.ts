@@ -90,11 +90,11 @@ export default class {
 			"\n" +
 			(inviteData.inviter
 				? this.client.emotes.invite +
-				  " Eingeladen von: " +
-				  inviteData.inviter.displayName +
-				  " (@" +
-				  inviteData.inviter.username +
-				  ")"
+					" Eingeladen von: " +
+					inviteData.inviter.displayName +
+					" (@" +
+					inviteData.inviter.username +
+					")"
 				: "");
 
 		const memberJoinEmbed: EmbedBuilder = this.client.createEmbed(

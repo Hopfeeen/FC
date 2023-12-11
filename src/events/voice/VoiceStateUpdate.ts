@@ -18,25 +18,25 @@ export default class {
 		const guildData: any = await this.client.findOrCreateGuild(guild.id);
 
 		/* save date on voice join */
-		if (!oldChannel && newChannel){
+		if (!oldChannel && newChannel) {
 			const voiceFile = JSON.parse(fs.readFileSync("./assets/voice.json"));
 			if (!voiceFile.voiceTime) {
-				voiceFile.voiceTime= {}
+				voiceFile.voiceTime = {};
 			}
-			voiceFile.voiceTime[newMember.id] = Date.now()
+			voiceFile.voiceTime[newMember.id] = Date.now();
 			fs.writeFileSync("./assets/voice.json", JSON.stringify(voiceFile, null, 2));
 		}
 
 		/* calculate voice time on voice leave */
-		if (!newChannel && oldChannel){
+		if (!newChannel && oldChannel) {
 			const voiceFile = JSON.parse(fs.readFileSync("./assets/voice.json"));
 			if (!voiceFile.voiceTime) {
-				voiceFile.voiceTime= {}
+				voiceFile.voiceTime = {};
 			}
 			const joinDate: any = voiceFile.voiceTime[oldMember.id];
 			const durationInMs: any = Date.now() - joinDate;
-			const Min = durationInMs / 60000
-			if(!voiceFile.userTime){
+			const Min = durationInMs / 60000;
+			if (!voiceFile.userTime) {
 				voiceFile.userTime = {};
 			}
 
@@ -44,7 +44,7 @@ export default class {
 
 			fs.writeFileSync("./assets/voice.json", JSON.stringify(voiceFile, null, 2));
 		}
-		
+
 		if (newChannel && newMember.guild) {
 			if (
 				!guildData.settings?.joinToCreate?.enabled ||

@@ -52,9 +52,9 @@ export default class {
 			"\n" +
 			(invite.expiresTimestamp
 				? this.client.emotes.reminder +
-				  " Ablaufdatum: **" +
-				  moment(invite.expiresTimestamp).format("DD.MM.YYYY HH:mm") +
-				  "**"
+					" Ablaufdatum: **" +
+					moment(invite.expiresTimestamp).format("DD.MM.YYYY HH:mm") +
+					"**"
 				: "");
 
 		const auditLogs: any = await guild

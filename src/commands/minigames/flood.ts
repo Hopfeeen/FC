@@ -164,7 +164,7 @@ class FloodGame extends BaseGame {
 			? this.interaction.guild.translate("minigames/flood:win", { turns: String(this.turns) })
 			: this.interaction.guild.translate("minigames/flood:lose", {
 					turns: String(this.turns)
-			  });
+				});
 
 		const embed: EmbedBuilder = this.options.client.createEmbed(
 			this.interaction.guild.translate("minigames/flood:end") +

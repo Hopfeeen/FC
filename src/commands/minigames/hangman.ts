@@ -196,12 +196,12 @@ class HangmanGame extends BaseGame {
 			(this.guessed.length
 				? this.interaction.guild.translate("minigames/hangman:guessedLetters", {
 						e: this.client.emotes
-				  }) +
-				  "\n" +
-				  this.client.emotes.arrow +
-				  " " +
-				  this.guessed.join(", ") +
-				  "\n\n"
+					}) +
+					"\n" +
+					this.client.emotes.arrow +
+					" " +
+					this.guessed.join(", ") +
+					"\n\n"
 				: "") +
 			this.client.emotes.arrow +
 			" " +
@@ -231,8 +231,8 @@ class HangmanGame extends BaseGame {
 				this.guessed.includes(l)
 					? this.getAlphaEmoji(l)
 					: l === " "
-					? "⬜"
-					: this.client.emotes.question
+						? "⬜"
+						: this.client.emotes.question
 			)
 			.join(" ");
 	}

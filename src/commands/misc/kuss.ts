@@ -3,31 +3,33 @@ import BaseClient from "@structures/BaseClient";
 import { EmbedBuilder, SlashCommandBuilder } from "discord.js";
 
 export default class KussCommand extends BaseCommand {
-    public constructor(client: BaseClient) {
-        super(client, {
-            name: "kuss",
-            description: "give a kiss",
-            localizedDescriptions: {
-                de: "gib einen kuss"
-            },
-            cooldown: 1000,
-            dirname: __dirname,
-            slashCommand: {
-                addCommand: true,
-                data: new SlashCommandBuilder()
-            }
-        });
-    }
+	public constructor(client: BaseClient) {
+		super(client, {
+			name: "kuss",
+			description: "give a kiss",
+			localizedDescriptions: {
+				de: "gib einen kuss"
+			},
+			cooldown: 1000,
+			dirname: __dirname,
+			slashCommand: {
+				addCommand: true,
+				data: new SlashCommandBuilder()
+			}
+		});
+	}
 
-    public async dispatch(interaction: any, data: any): Promise<void> {
-        this.interaction = interaction;
-        this.guild = interaction.guild;
-        await this.kuss();
-    }
+	public async dispatch(interaction: any, data: any): Promise<void> {
+		this.interaction = interaction;
+		this.guild = interaction.guild;
+		await this.kuss();
+	}
 
-    private async kuss(): Promise<any> {
-        const kussEmbed: EmbedBuilder = this.client.createEmbed("### Kussi", null, "normal");
-        kussEmbed.setImage("https://cdn.discordapp.com/attachments/1116797977432961197/1177711542960148510/image.png?ex=65738058&is=65610b58&hm=66aeaf3089720e712fa5b175975cf4daca6ed8f529ad769a14f55e41988ec072");
-        return this.interaction.followUp({ embeds: [kussEmbed] });
-    }
+	private async kuss(): Promise<any> {
+		const kussEmbed: EmbedBuilder = this.client.createEmbed("### Kussi", null, "normal");
+		kussEmbed.setImage(
+			"https://cdn.discordapp.com/attachments/1116797977432961197/1177711542960148510/image.png?ex=65738058&is=65610b58&hm=66aeaf3089720e712fa5b175975cf4daca6ed8f529ad769a14f55e41988ec072"
+		);
+		return this.interaction.followUp({ embeds: [kussEmbed] });
+	}
 }

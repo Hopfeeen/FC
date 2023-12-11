@@ -3,30 +3,34 @@ import BaseClient from "@structures/BaseClient";
 import { EmbedBuilder, SlashCommandBuilder } from "discord.js";
 
 export default class NevarCommand extends BaseCommand {
-    public constructor(client: BaseClient) {
-        super(client, {
-            name: "nevar",
-            description: "Show the original bot to invite",
-            localizedDescriptions: {
-                de: "Zeige den originalen Bot zum einladen"
-            },
-            cooldown: 1000,
-            dirname: __dirname,
-            slashCommand: {
-                addCommand: true,
-                data: new SlashCommandBuilder()
-            }
-        });
-    }
+	public constructor(client: BaseClient) {
+		super(client, {
+			name: "nevar",
+			description: "Show the original bot to invite",
+			localizedDescriptions: {
+				de: "Zeige den originalen Bot zum einladen"
+			},
+			cooldown: 1000,
+			dirname: __dirname,
+			slashCommand: {
+				addCommand: true,
+				data: new SlashCommandBuilder()
+			}
+		});
+	}
 
-    public async dispatch(interaction: any, data: any): Promise<void> {
-        this.interaction = interaction;
-        this.guild = interaction.guild;
-        await this.nevar();
-    }
+	public async dispatch(interaction: any, data: any): Promise<void> {
+		this.interaction = interaction;
+		this.guild = interaction.guild;
+		await this.nevar();
+	}
 
-    private async nevar(): Promise<any> {
-        const nevarEmbed: EmbedBuilder = this.client.createEmbed("Unser Bot Nevar. Diesen Bot kannst du kostenlos auf deinem Discord Server einladen. Hier kommst du auf die Website: https://nevar.eu", "arrow", "normal");
-        return this.interaction.followUp({ embeds: [nevarEmbed] });
-    }
+	private async nevar(): Promise<any> {
+		const nevarEmbed: EmbedBuilder = this.client.createEmbed(
+			"Unser Bot Nevar. Diesen Bot kannst du kostenlos auf deinem Discord Server einladen. Hier kommst du auf die Website: https://nevar.eu",
+			"arrow",
+			"normal"
+		);
+		return this.interaction.followUp({ embeds: [nevarEmbed] });
+	}
 }

@@ -267,7 +267,7 @@ export default class HelpCommand extends BaseCommand {
 							new ActionRowBuilder({
 								components: [forwardButton, homeButton]
 							})
-					  ]
+						]
 			});
 			const paginationCollector = helpEmbedSent.createMessageComponentCollector({
 				filter: (i: any): boolean => i.user.id === this.interaction.user.id,

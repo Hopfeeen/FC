@@ -5,7 +5,7 @@ const ms: any = ems("de");
 // @ts-ignore - Could not find a declaration file for module 'perspective-api-client'
 import Perspective from "perspective-api-client";
 import OpenAI from "openai";
-import * as fs from "fs"
+import * as fs from "fs";
 
 export default class {
 	private client: BaseClient;
@@ -35,14 +35,14 @@ export default class {
 
 		/* count messages */
 		if (!message.author.bot) {
-		    messagesFile.count = (messagesFile?.count || 0) + 1;
+			messagesFile.count = (messagesFile?.count || 0) + 1;
 			if (!messagesFile.users) {
-		        messagesFile.users = {};
-		    }
-			messagesFile.users[message.author.id] = (messagesFile.users[message.author.id] || 0) + 1;
-		    fs.writeFileSync("./assets/messages.json", JSON.stringify(messagesFile, null, 2));
+				messagesFile.users = {};
+			}
+			messagesFile.users[message.author.id] =
+				(messagesFile.users[message.author.id] || 0) + 1;
+			fs.writeFileSync("./assets/messages.json", JSON.stringify(messagesFile, null, 2));
 		}
-﻿
 		/* Afk system */
 		/* Author mentions afk user */
 		if ((message.mentions.repliedUser || message.mentions.users) && !message.author.bot) {
@@ -338,12 +338,13 @@ export default class {
 			});
 
 			const messages: any = this.client.aiChat.get(message.guild.id);
-			const response: any =
-				await openai.chat.completions.create({
+			const response: any = await openai.chat.completions
+				.create({
 					model: "gpt-3.5-turbo-16k",
 					messages: messages
-				}).catch((e: any): void => {
-					if(e.status > 400 && e.status < 500){
+				})
+				.catch((e: any): void => {
+					if (e.status > 400 && e.status < 500) {
 						message.reply({
 							content:
 								this.client.emotes.error +
@@ -354,10 +355,7 @@ export default class {
 						});
 
 						/* check if context is too long */
-						if (
-							e.status === 400 &&
-							e.error.code === "context_length_exceeded"
-						) {
+						if (e.status === 400 && e.error.code === "context_length_exceeded") {
 							/* remove old messages */
 							const messagesArray: any = this.client.aiChat.get(message.guild.id);
 							function removeOldestItems(arr: any, numItems: number): void {
@@ -377,7 +375,7 @@ export default class {
 							this.client.aiChat.set(message.guild.id, messagesArray);
 						}
 					}
-				})
+				});
 
 			const responseMessage: string | null = response?.choices[0]?.message.content;
 
@@ -388,7 +386,7 @@ export default class {
 				});
 				message.reply({ content: responseMessage });
 			} else {
-				if(response){
+				if (response) {
 					message.reply({
 						content:
 							this.client.emotes.error +
