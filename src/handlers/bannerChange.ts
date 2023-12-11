@@ -44,7 +44,7 @@ async function setMessagesStatsBanner(client: BaseClient): Promise<void> {
 async function setBoosterBanner(client: BaseClient): Promise<void> {
     /* get guild */
     const guild: any = client.guilds.cache.get(client.config.support["ID"]);
-    const image: any = await loadImage("./assets/ServerBoostBannerVORLAGE.png");
+    const image: any = await loadImage("./assets/banner_booster_template.png");
     const canvas: any = createCanvas(image.width, image.height);
     const ctx: any = canvas.getContext("2d");
 
@@ -70,7 +70,7 @@ async function setBoosterBanner(client: BaseClient): Promise<void> {
     ctx.fillText(String(boosters.length || 0), 460, 370);
 
     const buffer: any = canvas.toBuffer("image/png");
-    fs.writeFileSync("./assets/newBannertest.png", buffer);
+    fs.writeFileSync("./assets/banner_booster.png", buffer);
 
     guild.setBanner(buffer).catch((e) => {console.log(e)});
 }
