@@ -82,7 +82,7 @@ export default{
         setInterval(():void=>{
             const randomInt = client.utils.getRandomInt(1, 1);
             if(randomInt === 1) setMessagesStatsBanner(client);
-            if(randomInt === 2) setBoosterBanner(client);
+            //if(randomInt === 2) setBoosterBanner(client);
         },3*60*1000)
     }
 }
