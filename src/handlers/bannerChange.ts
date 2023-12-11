@@ -2,10 +2,11 @@ import BaseClient from "@structures/BaseClient";
 import { createCanvas, loadImage } from "canvas"
 import * as fs from "fs";
 import { registerFont } from "canvas"
-registerFont("./assets/SegoeUI.ttf", { family: "Segoe UI" });
+
 
 
 async function setMessagesStatsBanner(client: BaseClient): Promise<void> {
+    registerFont("./assets/SegoeUI.ttf", { family: "Segoe UI" });
     /* get guild */
     const guild: any = client.guilds.cache.get(client.config.support["ID"]);
     const image: any = await loadImage("./assets/banner_message_stats_template.png");
@@ -15,7 +16,7 @@ async function setMessagesStatsBanner(client: BaseClient): Promise<void> {
     if(!messagesFile.users) return
     const resultArray = Object.entries(messagesFile.users).sort((a, b) => b[1] - a[1]).slice(0, 3);
     ctx.drawImage(image, 0, 0, image.width, image.height);
-    ctx.font = "45px SegoeUI";
+    ctx.font = '45px "Segoe UI"';
     ctx.fillStyle = "black";
     let i = 0;
     let yCoord = 226;
@@ -38,7 +39,7 @@ async function setMessagesStatsBanner(client: BaseClient): Promise<void> {
     const buffer: any = canvas.toBuffer("image/png");
     fs.writeFileSync("./assets/banner_message_stats.png", buffer);
 
-    guild.setBanner(buffer).catch((e) => {console.log(e)});
+    guild.setBanner(buffer).catch((e: any): void => { console.log(e) });
 }
 
 async function setBoosterBanner(client: BaseClient): Promise<void> {
@@ -81,8 +82,10 @@ export default{
     init(client:BaseClient):void{
         setInterval(():void=>{
             const randomInt = client.utils.getRandomInt(1, 1);
+            console.log("test", randomInt)
+            if(randomInt === 1) console.log("HALLO")
             if(randomInt === 1) setMessagesStatsBanner(client);
             //if(randomInt === 2) setBoosterBanner(client);
-        },3*60*1000)
+        },5 * 60 *1000)
     }
 }
