@@ -8,7 +8,7 @@ registerFont("./assets/SegoeUI.ttf", { family: "Segoe UI" });
 async function setMessagesStatsBanner(client: BaseClient): Promise<void> {
     /* get guild */
     const guild: any = client.guilds.cache.get(client.config.support["ID"]);
-    const image: any = await loadImage("./assets/aktivsteuserbanner.png");
+    const image: any = await loadImage("./assets/banner_message_stats_template.png");
     const canvas: any = createCanvas(image.width, image.height);
     const ctx: any = canvas.getContext("2d");
     const messagesFile: any = JSON.parse(fs.readFileSync("./assets/messages.json"));
@@ -36,7 +36,7 @@ async function setMessagesStatsBanner(client: BaseClient): Promise<void> {
     }
 
     const buffer: any = canvas.toBuffer("image/png");
-    fs.writeFileSync("./assets/currentBanner.png", buffer);
+    fs.writeFileSync("./assets/banner_message_stats.png", buffer);
 
     guild.setBanner(buffer).catch((e) => {console.log(e)});
 }
