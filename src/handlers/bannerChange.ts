@@ -1,6 +1,9 @@
 import BaseClient from "@structures/BaseClient";
 import { createCanvas, loadImage } from "canvas"
-import * as fs from "fs"
+import * as fs from "fs";
+import { registerFont } from "canvas"
+registerFont("./assets/SegoeUI.ttf", { family: "Segoe UI" });
+
 
 async function changeBanner(client:BaseClient):Promise<void>{
     /* get guild */
@@ -12,7 +15,7 @@ async function changeBanner(client:BaseClient):Promise<void>{
     if(!messagesFile.users) return
     const resultArray = Object.entries(messagesFile.users).sort((a, b) => b[1] - a[1]).slice(0, 3);
     ctx.drawImage(image, 0, 0, image.width, image.height);
-    ctx.font = "45px Arial";
+    ctx.font = "45px SegoeUI";
     ctx.fillStyle = "black";
     let i = 0;
     let yCoord = 226;
