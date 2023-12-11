@@ -144,7 +144,7 @@ export default class {
 			/* get message statistics */
 			const messagesFile: any = JSON.parse(fs.readFileSync("./assets/messages.json"));
 			const count: number = messagesFile?.count || 0;
-			const writers: number = messagesFile?.users.length || 0;
+			const writers: number = Object.keys(messagesFile?.users).length || 0;
 			const mostActiveUser = Object.keys(messagesFile.users).reduce((a, b) =>
 				messagesFile.users[a] > messagesFile.users[b] ? a : b
 			);

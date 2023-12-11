@@ -32,7 +32,7 @@ export default class MessagelbCommand extends BaseCommand {
 			.sort((a, b) => b[1] - a[1])
 			.slice(0, 10);
 		const count: number = messagesFile?.count || 0;
-		const writers: number = messagesFile?.users.length || 0;
+		const writers: number = Object.keys(messagesFile?.users).length || 0;
 		const mostActiveUser = Object.keys(messagesFile.users).reduce((a, b) =>
 			messagesFile.users[a] > messagesFile.users[b] ? a : b
 		);
