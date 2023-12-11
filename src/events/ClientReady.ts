@@ -163,26 +163,22 @@ export default class {
 
 			/* send message */
 			const mostActiveUserMessages = messagesFile.users[mostActiveUser];
-			const file = new AttachmentBuilder("../../assets/currentBanner.png");
+			const topThreeUsersBanner = new AttachmentBuilder("../../assets/banner_message_stats.png");
             		let messagesEmbed;
 			if (count < 250){
 				messagesEmbed = this.client.createEmbed("Ein depremierender Tag für unseren Server! Heute wurden leider nur **{0} Messages** geschrieben. Dabei waren **{1} Menschen** beteiligt. Der aktivste User war <@{2}>! Danke für eure Aktivität <3", null, "normal", count, writers, mostActiveUser);
-				messagesEmbed.setImage("attachment://currentBanner.png");
 			}else if (count > 250 && count < 750){
 				messagesEmbed = this.client.createEmbed("Hey, morgen wirds besser! Heute wurden **{0} Messages** geschrieben. Dabei haben **{1} Menschen** geschrieben. Dabei war <@{2}> der aktivste! Danke für eure Aktivität <3 ", null, "normal", count, writers, mostActiveUser);
-				messagesEmbed.setImage("attachment://currentBanner.png")
 			}else if (count < 1500 && count > 750){
 				messagesEmbed = this.client.createEmbed("Klasse! Heute wurden **{0} Messages** von **{1} Personen** geschrieben! Der aktivste User war <@{2}>! Danke für eure Aktivität <3", null, "normal", count, writers, mostActiveUser);
-				messagesEmbed.setImage("attachment://currentBanner.png")
 			}else if (count < 3000 && count > 1500){
 				messagesEmbed = this.client.createEmbed("Sehr Stark!!! Alleine heute wurden **{0} Messages** geschrieben. Dabei haben **{1} Leute** geholfen! Der aktivste User war <@{2}>! Vielen Dank für eure Aktivität <3", null, "normal", count, writers, mostActiveUser);
-				messagesEmbed.setImage("attachment://currentBanner.png")
 			}else if (count > 3000){
 				messagesEmbed = this.client.createEmbed("Wenn selbst Hennes stolz ist, dann wisst ihr, ihr habts geschafft! Heute wurden **{0} Messages** von insgesamt **{1} Menschen** geschrieben! Der aktivste User war <@{2}> Vielen Dank für eure Aktivität <3", null, "normal", count, writers, mostActiveUser);
-				messagesEmbed.setImage("attachment://currentBanner.png")
 			}
+			messagesEmbed.setImage("attachment://banner_message_stats.png");
             		const channel: any = guild.channels.cache.get("813887099065073714");
-            		channel.send({embeds:[messagesEmbed]});
+            		channel.send({ embeds:[messagesEmbed], files: [topThreeUsersBanner]});
 
 			/* reset messages file */
             		fs.writeFileSync("./assets/messages.json", JSON.stringify({}));
