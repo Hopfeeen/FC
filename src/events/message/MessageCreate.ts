@@ -36,7 +36,6 @@ export default class {
 		/* count messages */
 		if (!message.author.bot) {
 		    messagesFile.count = (messagesFile?.count || 0) + 1;
-		    messagesFile.writer = [...new Set([...(messagesFile.writer || []), message.author.id])];
 			if (!messagesFile.users) {
 		        messagesFile.users = {};
 		    }

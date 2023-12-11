@@ -31,7 +31,7 @@ export default class MessagelbCommand extends BaseCommand {
         const messagesFile: any = JSON.parse(fs.readFileSync("./assets/messages.json"));
         const resultArray = Object.entries(messagesFile.users).sort((a, b) => b[1] - a[1]).slice(0, 10);
         const count: number = messagesFile?.count || 0;
-        const writers: number = messagesFile?.writer.length || 0;
+        const writers: number = messagesFile?.users.length || 0;
         const mostActiveUser = Object.keys(messagesFile.users).reduce((a, b) => messagesFile.users[a] > messagesFile.users[b] ? a : b);
 	const mostActiveUserMessages = messagesFile.users[mostActiveUser];
         const leaderboardEmbed: EmbedBuilder = this.client.createEmbed("Die aktivsten Leute heute \n {0}", "text", "normal", resultArray.map(([id, count]) => this.client.emotes.arrow + ` **<@${id}> | ${count}** Messages`).join("\n"));

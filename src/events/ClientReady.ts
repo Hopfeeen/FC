@@ -124,9 +124,9 @@ export default class {
 		scheduleJob("0 0 * * *", async (): Promise<void> => {
 			/* get message statistics */
 	        	const messagesFile: any = JSON.parse(fs.readFileSync("./assets/messages.json"));
-	            	const count: number = messagesFile?.count || 0;
-	            	const writers: number = messagesFile?.writer.length || 0;
-			const mostActiveUser = Object.keys(messagesFile.users).reduce((a, b) => messagesFile.users[a] > messagesFile.users[b] ? a : b);
+				const count: number = messagesFile?.count || 0;
+				const writers: number = messagesFile?.users.length || 0;
+				const mostActiveUser = Object.keys(messagesFile.users).reduce((a, b) => messagesFile.users[a] > messagesFile.users[b] ? a : b);
 
 			/* get guild */
 			const guild: any = this.client.guilds.cache.get(this.client.config.support["ID"]);
@@ -164,7 +164,7 @@ export default class {
 			/* send message */
 			const mostActiveUserMessages = messagesFile.users[mostActiveUser];
 			const topThreeUsersBanner = new AttachmentBuilder("../../assets/banner_message_stats.png");
-            		let messagesEmbed;
+			let messagesEmbed;
 			if (count < 250){
 				messagesEmbed = this.client.createEmbed("Ein depremierender Tag für unseren Server! Heute wurden leider nur **{0} Messages** geschrieben. Dabei waren **{1} Menschen** beteiligt. Der aktivste User war <@{2}>! Danke für eure Aktivität <3", null, "normal", count, writers, mostActiveUser);
 			}else if (count > 250 && count < 750){
