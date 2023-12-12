@@ -28,7 +28,7 @@ export default class {
 
 			const joinDate: any = voiceStatisticsFile.userJoinTime[oldMember.id];
 			const userVoiceTime: any = Date.now() - joinDate;
-			const minutes: any = userVoiceTime / 60 * 1000;
+			const minutes: any = userVoiceTime / 60000;
 
 			voiceStatisticsFile.userVoiceTime[oldMember.id] = (voiceStatisticsFile.userVoiceTime[oldMember.id] || 0) + minutes;
 		}
