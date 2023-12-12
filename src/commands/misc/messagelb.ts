@@ -27,23 +27,19 @@ export default class MessagelbCommand extends BaseCommand {
 	}
 
 	private async messageLeaderboard(): Promise<any> {
-		const messagesFile: any = JSON.parse(fs.readFileSync("./assets/messages.json"));
-		const resultArray = Object.entries(messagesFile.users)
-			.sort((a, b) => b[1] - a[1])
+		const messageStatisticsFile: any = JSON.parse(fs.readFileSync("./assets/message_statistics.json").toString());
+
+		const mostActiveUsers: any[] = Object.entries(messageStatisticsFile.userMessages)
+			.sort((a: any, b: any) => b[1] - a[1])
 			.slice(0, 10);
-		const count: number = messagesFile?.count || 0;
-		const writers: number = Object.keys(messagesFile?.users).length || 0;
-		const mostActiveUser = Object.keys(messagesFile.users).reduce((a, b) =>
-			messagesFile.users[a] > messagesFile.users[b] ? a : b
-		);
-		const mostActiveUserMessages = messagesFile.users[mostActiveUser];
+
 		const leaderboardEmbed: EmbedBuilder = this.client.createEmbed(
 			"Die aktivsten Leute heute \n {0}",
 			"text",
 			"normal",
-			resultArray
+			mostActiveUsers
 				.map(
-					([id, count]) => this.client.emotes.arrow + ` **<@${id}> | ${count}** Messages`
+					([id, count]: any): string => this.client.emotes.arrow + ` **<@${id}> | ${count}** Messages`
 				)
 				.join("\n")
 		);

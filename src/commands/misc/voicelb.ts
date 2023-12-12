@@ -3,11 +3,11 @@ import BaseClient from "@structures/BaseClient";
 import { EmbedBuilder, SlashCommandBuilder } from "discord.js";
 import * as fs from "fs";
 
-export default class NevarCommand extends BaseCommand {
+export default class VoicelbCommand extends BaseCommand {
 	public constructor(client: BaseClient) {
 		super(client, {
 			name: "voicelb",
-			description: "Show how much voice time blabla",
+			description: "Shows the voice time leaderboard",
 			localizedDescriptions: {
 				de: "Zeige die aktivsten Sprecher des Tages"
 			},
@@ -23,39 +23,35 @@ export default class NevarCommand extends BaseCommand {
 	public async dispatch(interaction: any, data: any): Promise<void> {
 		this.interaction = interaction;
 		this.guild = interaction.guild;
-		await this.geilerBot();
+		await this.showVoiceTime();
 	}
 
-	private async geilerBot(): Promise<any> {
-		const voiceFile: any = JSON.parse(fs.readFileSync("./assets/voice.json"));
+	private async showVoiceTime(): Promise<any> {
+		const voiceFile: any = JSON.parse(fs.readFileSync("./assets/voice_statistics.json").toString());
 		if (!voiceFile.userTime) {
 			const embed: EmbedBuilder = this.client.createEmbed(
-				"Es war noch keiner im Voice",
+				"Es war heute noch kein Nutzer in einem Sprachkanal",
 				"error",
 				"normal"
 			);
 			return this.interaction.followUp({ embeds: [embed] });
 		}
-		var resultArray = Object.entries(voiceFile.userTime)
-			.sort((a, b) => b[1] - a[1])
+		const topVoiceUsers: any[] = Object.entries(voiceFile.userVoiceTime)
+			.sort((a: any, b: any) => b[1] - a[1])
 			.slice(0, 10);
-		console.log(resultArray);
-		const IchBinAbsolutDumm: number = voiceFile?.userTime.length || 0;
-		const mostActiveUser = Object.keys(voiceFile.userTime).reduce((a, b) =>
-			voiceFile.userTime[a] > voiceFile.userTime[b] ? a : b
-		);
-		const mostActiveUserMessages = voiceFile.userTime[mostActiveUser];
-		const nevarEmbed: EmbedBuilder = this.client.createEmbed(
+
+
+		const voicetimeEmbed: EmbedBuilder = this.client.createEmbed(
 			"Die aktivsten Leute heute \n {0}",
 			"text",
 			"normal",
-			resultArray
+			topVoiceUsers
 				.map(
-					([id, count]) =>
+					([id, count]: any): string =>
 						this.client.emotes.arrow + ` **<@${id}> | ${Math.round(count)}** Minuten`
 				)
 				.join("\n")
 		);
-		return this.interaction.followUp({ embeds: [nevarEmbed] });
+		return this.interaction.followUp({ embeds: [voicetimeEmbed] });
 	}
 }

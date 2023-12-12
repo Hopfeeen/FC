@@ -16,7 +16,7 @@ config-sample.toml
 assets/disabled.json
 assets/news.json
 assets/votes.json
-assets/messages.json
-assets/voice.json
+assets/message_statistics.json
+assets/voice_statistics.json
 assets/banner_message_stats.png
 assets/banner_booster.png

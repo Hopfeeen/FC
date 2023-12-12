@@ -27,18 +27,25 @@ export default class MessagesCommand extends BaseCommand {
 	}
 
 	private async messages(): Promise<any> {
-		const messagesFile: any = JSON.parse(fs.readFileSync("./assets/messages.json"));
-		const count: number = messagesFile?.count || 0;
-		const writers: number = Object.keys(messagesFile?.users).length || 0;
-		const mostActiveUser = Object.keys(messagesFile.users).reduce((a, b) =>
-			messagesFile.users[a] > messagesFile.users[b] ? a : b
+		const messageStatisticsFile: any = JSON.parse(fs.readFileSync("./assets/message_statistics.json").toString());
+		const messagesCount: number = messageStatisticsFile?.count || 0;
+		if(!messageStatisticsFile.userMessages){
+			const embed: EmbedBuilder = this.client.createEmbed(
+				"Es wurde heute noch keine Nachricht geschrieben",
+				"error",
+				"normal"
+			);
+			return this.interaction.followUp({ embeds: [embed] });
+		}
+		const writers: number = Object.keys(messageStatisticsFile?.userMessages).length || 0;
+		const mostActiveUser: any = Object.keys(messageStatisticsFile.userMessages).reduce((a: any, b: any) =>
+			messageStatisticsFile.userMessages[a] > messageStatisticsFile.userMessages[b] ? a : b
 		);
-		const mostActiveUserMessages = messagesFile.users[mostActiveUser];
 		const messagesEmbed: EmbedBuilder = this.client.createEmbed(
 			"Heute wurden bisher **{0} Nachrichten** von **{1} Menschen** geschrieben! Bisher ist <@{2}> der Aktivste! Danke für eure Aktivität <3",
 			"arrow",
 			"normal",
-			count,
+			messagesCount,
 			writers,
 			mostActiveUser
 		);

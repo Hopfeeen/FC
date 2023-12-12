@@ -17,33 +17,22 @@ export default class {
 		const { guild } = newMember;
 		const guildData: any = await this.client.findOrCreateGuild(guild.id);
 
-		/* save date on voice join */
-		if (!oldChannel && newChannel) {
-			const voiceFile = JSON.parse(fs.readFileSync("./assets/voice.json"));
-			if (!voiceFile.voiceTime) {
-				voiceFile.voiceTime = {};
-			}
-			voiceFile.voiceTime[newMember.id] = Date.now();
-			fs.writeFileSync("./assets/voice.json", JSON.stringify(voiceFile, null, 2));
+		/* Voice statistics */
+		const voiceStatisticsFile: any = JSON.parse(fs.readFileSync("./assets/voice_statistics.json").toString());
+		if(!oldChannel && newChannel){
+			voiceStatisticsFile.userJoinTime = voiceStatisticsFile.userJoinTime || {};
+			voiceStatisticsFile.userJoinTime[newMember.id] = Date.now();
+		}else if(!newChannel && oldChannel){
+			voiceStatisticsFile.userJoinTime = voiceStatisticsFile.userJoinTime || {};
+			voiceStatisticsFile.userVoiceTime = voiceStatisticsFile.userVoiceTime || {};
+
+			const joinDate: any = voiceStatisticsFile.userJoinTime[oldMember.id];
+			const userVoiceTime: any = Date.now() - joinDate;
+			const minutes: any = userVoiceTime / 60 * 1000;
+
+			voiceStatisticsFile.userVoiceTime[oldMember.id] = (voiceStatisticsFile.userVoiceTime[oldMember.id] || 0) + minutes;
 		}
-
-		/* calculate voice time on voice leave */
-		if (!newChannel && oldChannel) {
-			const voiceFile = JSON.parse(fs.readFileSync("./assets/voice.json"));
-			if (!voiceFile.voiceTime) {
-				voiceFile.voiceTime = {};
-			}
-			const joinDate: any = voiceFile.voiceTime[oldMember.id];
-			const durationInMs: any = Date.now() - joinDate;
-			const Min = durationInMs / 60000;
-			if (!voiceFile.userTime) {
-				voiceFile.userTime = {};
-			}
-
-			voiceFile.userTime[oldMember.id] = (voiceFile.userTime[oldMember.id] || 0) + Min;
-
-			fs.writeFileSync("./assets/voice.json", JSON.stringify(voiceFile, null, 2));
-		}
+		fs.writeFileSync("./assets/voice_statistics.json", JSON.stringify(voiceStatisticsFile, null, 2));
 
 		if (newChannel && newMember.guild) {
 			if (

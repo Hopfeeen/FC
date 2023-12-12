@@ -31,18 +31,15 @@ export default class {
 		member.data = data.member;
 		member.user.data = data.user;
 
-		const messagesFile = JSON.parse(fs.readFileSync("./assets/messages.json"));
-
 		/* count messages */
 		if (!message.author.bot) {
-			messagesFile.count = (messagesFile?.count || 0) + 1;
-			if (!messagesFile.users) {
-				messagesFile.users = {};
-			}
-			messagesFile.users[message.author.id] =
-				(messagesFile.users[message.author.id] || 0) + 1;
-			fs.writeFileSync("./assets/messages.json", JSON.stringify(messagesFile, null, 2));
+			const messageStatisticsFile: any = JSON.parse(fs.readFileSync("./assets/message_statistics.json").toString());
+			messageStatisticsFile.count = (messageStatisticsFile.count || 0) + 1;
+			messageStatisticsFile.userMessages = messageStatisticsFile.userMessages || {};
+			messageStatisticsFile.userMessages[message.author.id] = (messageStatisticsFile.userMessages[message.author.id] || 0) + 1;
+			fs.writeFileSync("./assets/message_statistics.json", JSON.stringify(messageStatisticsFile, null, 2));
 		}
+
 		/* Afk system */
 		/* Author mentions afk user */
 		if ((message.mentions.repliedUser || message.mentions.users) && !message.author.bot) {

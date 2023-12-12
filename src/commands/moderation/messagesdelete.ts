@@ -3,7 +3,7 @@ import BaseClient from "@structures/BaseClient";
 import { EmbedBuilder, SlashCommandBuilder } from "discord.js";
 import fs from "fs";
 
-export default class AvatarCommand extends BaseCommand {
+export default class MessagesdeleteCommand extends BaseCommand {
 	public constructor(client: BaseClient) {
 		super(client, {
 			name: "messagesdelete",
@@ -54,10 +54,9 @@ export default class AvatarCommand extends BaseCommand {
 	}
 
 	private async messagesDelete(user: any, anzahl: number): Promise<any> {
-		const messagesFile: any = JSON.parse(fs.readFileSync("./assets/messages.json"));
-		if (messagesFile.users[user.id])
-			messagesFile.users[user.id] = messagesFile.users[user.id] - anzahl;
-		fs.writeFileSync("./assets/messages.json", JSON.stringify(messagesFile, null, 4));
+		const messagesFile: any = JSON.parse(fs.readFileSync("./assets/message_statistics.json").toString());
+		if (messagesFile.userMessages[user.id]) messagesFile.userMessages[user.id] = messagesFile.userMessages[user.id] - anzahl;
+		fs.writeFileSync("./assets/message_statistics.json", JSON.stringify(messagesFile, null, 2));
 		const embed: EmbedBuilder = this.client.createEmbed(
 			"{0} wurden {1} Nachrichten abgezogen.",
 			"success",
