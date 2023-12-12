@@ -32,7 +32,7 @@ export default class HsvCommand extends BaseCommand {
 			"normal"
 		);
 		hsvEmbed.setImage(
-			"https://cdn.discordapp.com/attachments/1118163602310959134/1176285787453653032/csm_2_bl_logo_RGB_pos_076ac1ea68.png?ex=656e5082&is=655bdb82&hm=25fe3982d3c5c6789b2937d386660a38589842b0f2e1b312331533909dda6919"
+			"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRY4qntm_uAPFZSLkukh4inw9hCp78ILDXoFtIprpnNMiOUwGAlheEXBGMyiUgzvIv_z4Y&usqp=CAU"
 		);
 		return this.interaction.followUp({ embeds: [hsvEmbed] });
 	}
