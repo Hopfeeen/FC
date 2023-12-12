@@ -28,7 +28,7 @@ export default class VoicelbCommand extends BaseCommand {
 
 	private async showVoiceTime(): Promise<any> {
 		const voiceFile: any = JSON.parse(fs.readFileSync("./assets/voice_statistics.json").toString());
-		if (!voiceFile.userTime) {
+		if (!voiceFile.userVoiceTime) {
 			const embed: EmbedBuilder = this.client.createEmbed(
 				"Es war heute noch kein Nutzer in einem Sprachkanal",
 				"error",
