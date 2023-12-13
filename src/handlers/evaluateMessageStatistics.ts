@@ -40,7 +40,7 @@ async function evaluateMessageStatistics(client: BaseClient): Promise<void> {
     const topThreeBannerAttachment: AttachmentBuilder = new AttachmentBuilder("./assets/banner_message_stats.png");
     messageStatisticsEmbed.setImage("attachment://banner_message_stats.png");
 
-    const channel: any = guild.channels.cache.get("1167208720242053231");
+    const channel: any = guild.channels.cache.get("813887099065073714");
     channel.send({ embeds: [messageStatisticsEmbed], files: [topThreeBannerAttachment] });
 
     fs.writeFileSync("./assets/message_statistics.json", JSON.stringify({}));
@@ -57,7 +57,7 @@ async function evaluateMessageStatistics(client: BaseClient): Promise<void> {
         ];
 
         for(let i = 0; i < thresholds.length; i++){
-            if(count < thresholds[i] || i === thresholds.length - 1){
+            if(count <= thresholds[i] || i === thresholds.length - 1){
                 return messages[i] + " Heute wurden **" + count + " Messages** von **" + writers + " Personen** geschrieben! Der aktivste User war <@&" + mostActiveUser + ">! Danke für eure Aktivität <3";
             }
         }
