@@ -58,7 +58,7 @@ async function evaluateMessageStatistics(client: BaseClient): Promise<void> {
 
         for(let i = 0; i < thresholds.length; i++){
             if(count <= thresholds[i] || i === thresholds.length - 1){
-                return messages[i] + " Heute wurden **" + count + " Messages** von **" + writers + " Personen** geschrieben! Der aktivste User war <@&" + mostActiveUser + ">! Danke für eure Aktivität <3";
+                return messages[i] + " Heute wurden **" + count + " Messages** von **" + writers + " Personen** geschrieben! Der aktivste User war <@" + mostActiveUser + ">! Danke für eure Aktivität <3";
             }
         }
         return "";
