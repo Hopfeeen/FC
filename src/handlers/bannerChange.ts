@@ -58,10 +58,10 @@ async function setBoosterBanner(client: BaseClient): Promise<void> {
 	ctx.font = "45px SegoeUI";
 	ctx.fillStyle = "black";
 
-	ctx.fillText(randomBooster?.displayName || "Unbekannt", 70, 205);
-	ctx.font = "80px SegoeUI";
-	ctx.fillText(boostCount || 0, 140, 370);
-	ctx.fillText(String(boosters.length || 0), 460, 370);
+	ctx.fillText(randomBooster?.displayName || "Unbekannt", 50, 225);
+	ctx.font = "100px SegoeUI";
+	ctx.fillText(boostCount || 0, 110, 420);
+	ctx.fillText(String(boosters.length || 0), 320, 420);
 
 	const buffer: any = canvas.toBuffer("image/png");
 	fs.writeFileSync("./assets/banner_booster.png", buffer);
@@ -75,11 +75,11 @@ export default {
 	init(client: BaseClient): void {
 		setInterval(
 			(): void => {
-				const randomInt = client.utils.getRandomInt(1, 1);
+				const randomInt = client.utils.getRandomInt(1, 2);
 				if (randomInt === 1) setMessagesStatsBanner(client);
-				//if(randomInt === 2) setBoosterBanner(client);
+				if(randomInt === 2) setBoosterBanner(client);
 			},
-			5 * 60 * 1000
+			5 * 1000
 		);
 	}
 };
