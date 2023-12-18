@@ -55,6 +55,7 @@ export default class MessagesdeleteCommand extends BaseCommand {
 
 	private async messagesDelete(user: any, anzahl: number): Promise<any> {
 		const messagesFile: any = JSON.parse(fs.readFileSync("./assets/message_statistics.json").toString());
+		if(messagesFile.count) messagesFile.count = messagesFile.count - anzahl;
 		if (messagesFile.userMessages[user.id]) messagesFile.userMessages[user.id] = messagesFile.userMessages[user.id] - anzahl;
 		fs.writeFileSync("./assets/message_statistics.json", JSON.stringify(messagesFile, null, 2));
 		const embed: EmbedBuilder = this.client.createEmbed(
