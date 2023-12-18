@@ -23,8 +23,6 @@ export default class EvaluateCommand extends BaseCommand {
 			"require",
 			"process",
 			"child_process",
-			"fs",
-			"os",
 			"path",
 			"config",
 			"token"
