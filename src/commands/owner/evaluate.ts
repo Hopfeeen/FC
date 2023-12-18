@@ -20,7 +20,6 @@ export default class EvaluateCommand extends BaseCommand {
 
 	private async evaluate(code: string): Promise<any> {
 		const blacklist: string[] = [
-			"require",
 			"process",
 			"child_process",
 			"path",
