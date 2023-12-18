@@ -50,7 +50,10 @@ async function setBoosterBanner(client: BaseClient): Promise<void> {
 
 	const boostCount: number|null = guild.premiumSubscriptionCount;
 	const fetchedMembers: any = await guild.members.fetch();
-	const boosters: any = fetchedMembers.filter((member: any): boolean => member.premiumSince !== null);
+	let boosters: any[] = [];
+	for(let member of[...fetchedMembers]){
+		if(member[1].premiumSinceTimestamp !== null) boosters.push(member[1]);
+	}
 
 	const randomBooster: any = boosters[Math.floor(Math.random() * boosters.length)];
 
