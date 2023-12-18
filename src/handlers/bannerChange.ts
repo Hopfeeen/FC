@@ -79,7 +79,7 @@ export default {
 				if (randomInt === 1) setMessagesStatsBanner(client);
 				if(randomInt === 2) setBoosterBanner(client);
 			},
-			5 * 1000
+			5 * 60 * 1000
 		);
 	}
 };
