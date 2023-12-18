@@ -36,6 +36,9 @@ async function evaluateMessageStatistics(client: BaseClient): Promise<void> {
 
     await client.wait(5000);
 
+    guild.members.cache.get(mostActiveUser).roles.add(pokalSiegerRole).catch((): void => {});
+
+
     const messageStatisticsEmbed: EmbedBuilder = client.createEmbed(getEmbedMessage(messagesCount, writersCount, mostActiveUser), null, "normal");
     const topThreeBannerAttachment: AttachmentBuilder = new AttachmentBuilder("./assets/banner_message_stats.png");
     messageStatisticsEmbed.setImage("attachment://banner_message_stats.png");
