@@ -30,6 +30,7 @@ export default class {
 			const userVoiceTime: any = Date.now() - joinDate;
 			const minutes: any = userVoiceTime / 60000;
 
+			delete voiceStatisticsFile.userJoinTime[oldMember.id];
 			voiceStatisticsFile.userVoiceTime[oldMember.id] = (voiceStatisticsFile.userVoiceTime[oldMember.id] || 0) + minutes;
 		}
 		fs.writeFileSync("./assets/voice_statistics.json", JSON.stringify(voiceStatisticsFile, null, 2));
