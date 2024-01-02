@@ -96,7 +96,7 @@ export default class {
 							Stream: true,
 							MuteMembers: true,
 							DeafenMembers: true,
-							MoveMembers: true
+							MoveMembers: false
 						})
 						.catch((e: any): void => {});
 

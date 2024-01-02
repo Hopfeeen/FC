@@ -17,27 +17,27 @@
 
 [ general ]
 # Enter your bot token here*
-BOT_TOKEN = ""
+BOT_TOKEN = "MTAxNzEzOTIzODQwNTQxOTExMA.GVHAzJ.WmRxAP3AO3HkOWUzBJtmAcKyaYQnstw5j4aa3M"
 # Your MongoDB login url*
-MONGO_CONNECTION = ""
+MONGO_CONNECTION = "mongodb://localhost:27017"
 # Used as embed author url*
-WEBSITE = ""
+WEBSITE = "https://discord.gg/TcXtB2jkEx"
 # All the IDs of the owners of the bot
-OWNER_IDS = []
+OWNER_IDS = ["904402034600575026"]
 
 [ support ]
 # ID of your support server*
-ID = ""
+ID = "1059910677067735100"
 # An invitation from your support server*
-INVITE = ""
+INVITE = "https://discord.gg/9EAxCAghTq"
 # ID of the channel where the bot sends its logs*
-BOT_LOG = ""
+BOT_LOG = "1078810235336130630"
 # ID of the channel where the bot sends its errors*
-ERROR_LOG = ""
+ERROR_LOG = "1078810235336130630"
 
 [ embeds ]
 # Default footer text for all embeds*
-FOOTER_TEXT = ""
+FOOTER_TEXT = "Hopfen den blas ich einen"
 # Color settings for embeds*
 DEFAULT_COLOR = "#5865F2"
 SUCCESS_COLOR = "#00A56A"
@@ -113,4 +113,4 @@ MESSAGE = "mit {users} Nutzern"
 [[ presence ]]
 STATUS = "online"
 TYPE = "Watching"
-MESSAGE = "nevar.eu"
+MESSAGE = "Hopfen bester Mann"

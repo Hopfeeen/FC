@@ -12,12 +12,12 @@ Logger.log("Installation started..");
 const configText = fs.readFileSync('./assets/config.txt', 'utf8').toString()
     .replace('{version}', require('@root/package.json').version)
 
-fs.writeFile('config-sample.toml', configText, function(e){
+fs.writeFile('config.toml', configText, function(e){
     if(e){
-        Logger.error("Couldn't create config-sample.toml")
+        Logger.error("Couldn't create config.toml")
         console.error(new Error(e));
     }else{
-        Logger.success("Successfully created config-sample.toml")
+        Logger.success("Successfully created config.toml")
     }
 });
 

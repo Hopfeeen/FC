@@ -12,10 +12,11 @@ build/
 
 # Bot
 config.toml
-config-sample.toml
+config.toml
 assets/disabled.json
 assets/news.json
 assets/votes.json
+assets/selke_samstag.json
 assets/message_statistics.json
 assets/voice_statistics.json
 assets/banner_message_stats.png

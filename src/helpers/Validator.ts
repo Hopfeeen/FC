@@ -32,9 +32,9 @@ export default class Validator {
 	static configValidator(): void {
 		Logger.log("TOML: Validating config file...");
 		if (!fs.existsSync("./config.toml")) {
-			if (fs.existsSync("./config-sample.toml")) {
+			if (fs.existsSync("./config.toml")) {
 				Logger.error(
-					"TOML: config.toml does not exist. Make sure to rename config-sample.toml to config.toml"
+					"TOML: config.toml does not exist. Make sure to rename config.toml to config.toml"
 				);
 			} else {
 				Logger.error("TOML: config.toml does not exist. Make sure to run 'npm run config'");

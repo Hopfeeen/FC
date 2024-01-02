@@ -1,7 +1,7 @@
 import * as fs from "fs";
 import { scheduleJob } from "node-schedule";
 import moment from "moment";
-import {Collection, ComponentType, Guild, Invite, AttachmentBuilder, EmbedBuilder} from "discord.js";
+import {Collection, ComponentType, Guild, Invite, AttachmentBuilder, EmbedBuilder, ButtonBuilder } from "discord.js";
 
 import handlePresence from "@handlers/presence";
 import registerInteractions from "@handlers/registerInteractions";
@@ -55,16 +55,46 @@ export default class {
 			await createBundesligaGameEvent(client);
 		});
 
-		scheduleJob("0 0 * * 6", async (): Promise<void> => {
+		scheduleJob("22 1 * * *", async (): Promise<void> => {
 			const guild: any = this.client.guilds.cache.get(this.client.config.support["ID"]);
-			const channel: any = guild.channels.cache.get("813887099065073714");
+			const channel: any = guild.channels.cache.get("1078810235336130630");
 
 			const selkeSamstagEmbed: EmbedBuilder = this.client.createEmbed("Es ist wieder soweit... **Es ist...**", null, "normal");
 			selkeSamstagEmbed.setImage("https://cdn.discordapp.com/attachments/1116797977432961197/1175857152598999192/SelkeSamstag.png?ex=656cc14f&is=655a4c4f&hm=9ae60215fa91e52d215ef7e1888034698fcbb53ebf1e23118d3ac9ee74c71967");
+			const selkeSamstagButton: ButtonBuilder = this.client.createButton("Hallo", "SELKE SAMSTAG", "Success", "<:Selke:1189721350823215115>", false)
+			const selkeButtonReihe: any = this.client.createMessageComponentsRow(selkeSamstagButton)
 
-			channel.send({ embeds: [selkeSamstagEmbed] });
+			const message = await channel.send({ embeds: [selkeSamstagEmbed], components: [selkeButtonReihe] });
+			const userids = []
+			const collector = message.createMessageComponentCollector({time: 1000 * 60 * 5, componentType:ComponentType.Button})
+			const SelkeDatei: any = JSON.parse(fs.readFileSync("./assets/selke_samstag.json").toString());
+			collector.on("collect",(i)=>{
+				if (userids.includes(i.user.id)) return;
+				SelkeDatei.userClickCount = SelkeDatei.userClickCount || {};
+				SelkeDatei.userClickCount[i.user.id] = (SelkeDatei?.userClickCount[i.user.id] || 0) + 1;
+				fs.writeFileSync("./assets/selke_samstag.json", JSON.stringify(SelkeDatei,null, 2))
+				userids.push(i.user.id)
+				i.reply({ content: i.user.toString() + " Du feierst den Selke Samstag Yayy" });
+
+				const addRole = (userId: string, threshold: number, roleId: string) => {
+					const member: any = guild.members.cache.get(userId);
+					if(member && SelkeDatei.userClickCount[userId] >= threshold){
+						member.roles.add(roleId).catch((): void => {});
+					}
+				}
+
+				for(const userId in SelkeDatei.userClickCount || {}){
+					addRole(userId, 1, "1191451464170737814");
+					addRole(userId, 250, "1179181792587153549");
+					addRole(userId, 500, "1179181862543958047");
+					addRole(userId, 1000, "1179181918537912404");
+				}
+			})
+
+
+
+
 		});
-
 		/* Initiate dashboard */
 		if (config.dashboard["ENABLED"]) dashboard.init(client);
 

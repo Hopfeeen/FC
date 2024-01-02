@@ -12,10 +12,10 @@ async function evaluateVoiceTimeStatistics(client: BaseClient): Promise<void> {
 
         const userVoiceTime: number = voiceTimeStatisticsFile.userVoiceTime[userId];
         const rolesToAdd: any[] = [
-            { time: 60 * 1 * 10, roleId: "1180193937546289192" },
-            { time: 60 * 2 * 10, roleId: "1180194548366970941" },
-            { time: 60 * 4 * 10, roleId: "1180194581187395667" },
-            { time: 60 * 8 * 10, roleId: "1180194611847762020" },
+            { time: 60 * 1, roleId: "1180193937546289192" },
+            { time: 60 * 4, roleId: "1180194548366970941" },
+            { time: 60 * 8, roleId: "1180194581187395667" },
+            { time: 60 * 12, roleId: "1180194611847762020" },
         ];
 
         rolesToAdd.forEach((roleToAdd: any) => {
