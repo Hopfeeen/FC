@@ -56,7 +56,7 @@ export default class {
 			await createBundesligaGameEvent(client)
 		});
 
-		scheduleJob("19 2 * * *", async (): Promise<void> => {
+		scheduleJob("0 0 * * 6", async (): Promise<void> => {
 			await selkeSamtag(client)
 			})
 
