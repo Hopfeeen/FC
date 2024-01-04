@@ -8,7 +8,7 @@ async function evaluateVoiceTimeStatistics(client: BaseClient): Promise<void> {
         if(voiceTimeStatisticsFile.userJoinTime[userId]){
             const joinDate: any = voiceTimeStatisticsFile.userJoinTime[userId];
             const userVoiceTime: any = Date.now() - joinDate;
-            const minutes: any = userVoiceTime / 60 * 1000;
+            const minutes: any = userVoiceTime / 60000;
 
             voiceTimeStatisticsFile.userVoiceTime[userId] = (voiceTimeStatisticsFile.userVoiceTime[userId] || 0) + minutes;
 
