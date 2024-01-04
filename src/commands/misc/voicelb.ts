@@ -41,6 +41,15 @@ export default class VoicelbCommand extends BaseCommand {
 			.slice(0, 10);
 
 
+		function formatMinutes(minutes: number): string {
+			const hours: number = Math.floor(minutes / 60);
+			const restMinutes: number = minutes % 60;
+			const seconds: number = Math.floor((restMinutes % 1) * 60);
+
+			return `${hours ? hours + 'h' : ''} ${restMinutes ? Math.floor(restMinutes) + 'm' : ''} ${seconds ? seconds + 's' : ''}`.trim();
+
+		}
+
 		const voicetimeEmbed: EmbedBuilder = this.client.createEmbed(
 			"Die aktivsten Leute heute \n {0}",
 			"text",
@@ -48,7 +57,7 @@ export default class VoicelbCommand extends BaseCommand {
 			topVoiceUsers
 				.map(
 					([id, count]: any): string =>
-						this.client.emotes.arrow + ` **<@${id}> | ${Math.round(count)}** Minuten`
+						this.client.emotes.arrow + ` **<@${id}> | ${formatMinutes(Math.round(count))}**`
 				)
 				.join("\n")
 		);
