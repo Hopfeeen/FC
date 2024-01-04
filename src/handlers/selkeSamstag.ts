@@ -4,7 +4,7 @@ import BaseClient from "@structures/BaseClient"
 
 async function selkeSamstag(client: BaseClient): Promise<void> {
 	const guild: any = client.guilds.cache.get(client.config.support["ID"]);
-	const channel: any = guild.channels.cache.get("1078810235336130630");
+	const channel: any = guild.channels.cache.get("813887099065073714");
 
 	const selkeSamstagEmbed: EmbedBuilder = client.createEmbed("Es ist wieder soweit... **Es ist...**", null, "normal");
 	selkeSamstagEmbed.setImage("https://cdn.discordapp.com/attachments/1116797977432961197/1175857152598999192/SelkeSamstag.png?ex=656cc14f&is=655a4c4f&hm=9ae60215fa91e52d215ef7e1888034698fcbb53ebf1e23118d3ac9ee74c71967");
