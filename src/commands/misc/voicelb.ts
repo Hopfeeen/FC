@@ -52,6 +52,7 @@ export default class VoicelbCommand extends BaseCommand {
 			if (restMinutes > 0) formattedTime.push(`${Math.floor(restMinutes)}m`);
 			if (seconds > 0) formattedTime.push(`${seconds}s`);
 
+			if(formattedTime.length === 0) formattedTime.push("0s");
 			return formattedTime.join(' ').trim();
 		}
 
