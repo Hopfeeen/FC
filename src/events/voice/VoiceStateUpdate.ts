@@ -46,7 +46,8 @@ export default class {
 					const afkMinutes: any = userAfkTime / 60000;
 
 					/* Not afk minutes */
-					const countedMinutes: any = voiceMinutes - afkMinutes;
+					let countedMinutes: any = voiceMinutes - afkMinutes;
+					if(countedMinutes < 0) countedMinutes = 0;
 
 
 					delete voiceStatisticsFile.userAfkSince[newMember.id];
@@ -79,6 +80,7 @@ export default class {
 				delete voiceStatisticsFile.userAfkSince[oldMember.id];
 			}
 
+			if(countedMinutes < 0) countedMinutes = 0;
 			delete voiceStatisticsFile.userJoinTime[oldMember.id];
 			voiceStatisticsFile.userVoiceTime[oldMember.id] = (voiceStatisticsFile.userVoiceTime[oldMember.id] || 0) + countedMinutes;
 		}

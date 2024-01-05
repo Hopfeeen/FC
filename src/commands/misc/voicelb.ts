@@ -46,8 +46,14 @@ export default class VoicelbCommand extends BaseCommand {
 			const restMinutes: number = minutes % 60;
 			const seconds: number = Math.floor((restMinutes % 1) * 60);
 
-			return `${hours ? hours + 'h' : ''} ${restMinutes ? Math.floor(restMinutes) + 'm' : ''} ${seconds ? seconds + 's' : ''}`.trim();
+			const formattedTime: string[] = [];
 
+			if (hours > 0) formattedTime.push(`${hours}h`);
+			if (restMinutes > 0) formattedTime.push(`${Math.floor(restMinutes)}m`);
+			if (seconds > 0) formattedTime.push(`${seconds}s`);
+
+			if(formattedTime.length === 0) formattedTime.push("0s");
+			return formattedTime.join(' ').trim();
 		}
 
 		const voicetimeEmbed: EmbedBuilder = this.client.createEmbed(
