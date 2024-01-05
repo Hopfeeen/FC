@@ -8,7 +8,7 @@ async function selkeSamstag(client: BaseClient): Promise<void> {
 
 	const selkeSamstagEmbed: EmbedBuilder = client.createEmbed("Es ist wieder soweit... **Es ist...**", null, "normal");
 	selkeSamstagEmbed.setImage("https://cdn.discordapp.com/attachments/1116797977432961197/1175857152598999192/SelkeSamstag.png?ex=656cc14f&is=655a4c4f&hm=9ae60215fa91e52d215ef7e1888034698fcbb53ebf1e23118d3ac9ee74c71967");
-	const selkeSamstagButton: ButtonBuilder = client.createButton("Hallo", "SELKE SAMSTAG", "Success", "<:Selke:1189721350823215115>", false)
+	const selkeSamstagButton: ButtonBuilder = client.createButton("Hallo", "Klicke hier!", "Success", "<:Selke:1189721350823215115>", false)
 	const selkeButtonReihe: any = client.createMessageComponentsRow(selkeSamstagButton)
 
 	const message = await channel.send({ embeds: [selkeSamstagEmbed], components: [selkeButtonReihe] });
