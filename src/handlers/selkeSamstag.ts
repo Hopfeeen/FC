@@ -32,10 +32,10 @@ async function selkeSamstag(client: BaseClient): Promise<void> {
 		}
 
 		for (const userId in SelkeDatei.userClickCount || {}) {
-			addRole(userId, 1, "1191451464170737814");
-			addRole(userId, 250, "1179181792587153549");
-			addRole(userId, 500, "1179181862543958047");
-			addRole(userId, 1000, "1179181918537912404");
+			addRole(userId, 1, "1189754631644008578");
+			addRole(userId, 3, "1189754684374798386");
+			addRole(userId, 5, "1189754727341248683");
+			addRole(userId, 10, "1189754763613569054");
 		}
 	})
 }
