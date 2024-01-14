@@ -30,11 +30,11 @@ async function evaluateVoiceTimeStatistics(client: BaseClient): Promise<void> {
             (a, b) => (voiceTimeStatisticsFile.userVoiceTime[a] > voiceTimeStatisticsFile.userVoiceTime[b] ? a : b)
         );
 
-        const pokalSiegerRole: any = guild.roles.cache.get("1176251297138225214");
-        pokalSiegerRole?.members.forEach((member: any, i: number): void => {
+         const pokalSiegerRole: any = guild.roles.cache.get("1176251297138225214");
+         pokalSiegerRole?.members.forEach((member: any, i: number): void => {
             setTimeout((): void => {
                 member.roles.remove(pokalSiegerRole).catch((): void => {});
-            }, i * 1000);
+    }, i * 1000);
         });
 
         guild.members.cache.get(mostActiveUser).roles.add(pokalSiegerRole).catch((): void => {});
