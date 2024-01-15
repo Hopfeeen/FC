@@ -39,7 +39,7 @@ export default class AskCommand extends BaseCommand {
 	private async getAnswer(question: string): Promise<any> {
 		const eightBallAnswers: any = this.translate("answers");
 		const randomAnswer: string = eightBallAnswers[Math.floor(Math.random() * eightBallAnswers.length)];
-  const text: string = this.client.emotes.question + " " + question + "\n\n" + this.client.emotes.arrow + " " + randomAnswer;
+  const text: string = this.client.emotes.question + " " + question + "\n" + this.client.emotes.arrow + " " + randomAnswer;
 		const eightBallEmbed: EmbedBuilder = this.client.createEmbed(text, null, "normal");
 		return this.interaction.followUp({ embeds: [eightBallEmbed] });
 	}
