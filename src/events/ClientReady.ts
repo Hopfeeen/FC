@@ -2,6 +2,7 @@ import * as fs from "fs";
 import { scheduleJob } from "node-schedule";
 import moment from "moment";
 import {Collection, ComponentType, Guild, Invite, AttachmentBuilder, EmbedBuilder, ButtonBuilder } from "discord.js";
+import { Player } from "discord-player";
 
 import handlePresence from "@handlers/presence";
 import registerInteractions from "@handlers/registerInteractions";
@@ -62,6 +63,22 @@ export default class {
 
 
 
+		/* Initiate music player */
+		const player = new Player(client, {
+			useLegacyFFmpeg: false,
+			skipFFmpeg: false,
+			ytdlOptions: {
+				quality: "highestaudio",
+				highWaterMark: 1 << 25,
+				requestOptions: {
+					headers: {
+						cookie: client.config.apikeys.GOOGLE_COOKIE
+					}
+				}
+			}
+		});
+		await player.extractors.loadDefault();
+		client.player = player;
 
 
 		/* Initiate dashboard */
