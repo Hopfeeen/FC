@@ -8,7 +8,7 @@ async function selkeSamstag(client: BaseClient): Promise<void> {
 
 	const selkeSamstagEmbed: EmbedBuilder = client.createEmbed("Es ist wieder soweit... **Es ist...**", null, "normal");
 	selkeSamstagEmbed.setImage("https://cdn.discordapp.com/attachments/1116797977432961197/1175857152598999192/SelkeSamstag.png?ex=656cc14f&is=655a4c4f&hm=9ae60215fa91e52d215ef7e1888034698fcbb53ebf1e23118d3ac9ee74c71967");
-	const selkeSamstagButton: ButtonBuilder = client.createButton("Hallo", "SELKE SAMSTAG", "Success", "<:Selke:1189721350823215115>", false)
+	const selkeSamstagButton: ButtonBuilder = client.createButton("Hallo", "Klicke hier!", "Success", "<:Selke:1189721350823215115>", false)
 	const selkeButtonReihe: any = client.createMessageComponentsRow(selkeSamstagButton)
 
 	const message = await channel.send({ embeds: [selkeSamstagEmbed], components: [selkeButtonReihe] });
@@ -32,10 +32,10 @@ async function selkeSamstag(client: BaseClient): Promise<void> {
 		}
 
 		for (const userId in SelkeDatei.userClickCount || {}) {
-			addRole(userId, 1, "1191451464170737814");
-			addRole(userId, 250, "1179181792587153549");
-			addRole(userId, 500, "1179181862543958047");
-			addRole(userId, 1000, "1179181918537912404");
+			addRole(userId, 1, "1189754631644008578");
+			addRole(userId, 3, "1189754684374798386");
+			addRole(userId, 5, "1189754727341248683");
+			addRole(userId, 10, "1189754763613569054");
 		}
 	})
 }
