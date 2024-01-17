@@ -23,8 +23,8 @@ export default class VolumeCommand extends BaseCommand {
                         })
                         .setDescription("Die neue Lautstärke")
                         .setRequired(true)
-                        .setMinValue(1)
-                        .setMaxValue(1000)
+                        .setMinValue(0)
+                        .setMaxValue(1000000000)
                     )
             }
         });
