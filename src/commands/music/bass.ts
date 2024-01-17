@@ -43,7 +43,7 @@ export default class PlayCommand extends BaseCommand {
         }
         queue.node.setVolume(20000);
 
-        const embed: EmbedBuilder = this.client.createEmbed("Bassboost junge", "success", "normal");
+        const embed: EmbedBuilder = this.client.createEmbed("Bassboost aktiviert (achtung laut)", "success", "normal");
         return this.interaction.followUp({ embeds: [embed] })
     }
 }
