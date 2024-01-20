@@ -274,8 +274,8 @@ export default class BanCommand extends BaseCommand {
 					break;
 				case "decline":
 					const declineEmbed: EmbedBuilder = this.client.createEmbed(
-						"{0} wurde nicht gebannt.",
-						"error",
+						"{0} wurde gebannt.",
+						"arrow",
 						"error",
 						ban.victim.user.username
 					);
