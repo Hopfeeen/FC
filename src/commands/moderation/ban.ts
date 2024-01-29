@@ -251,7 +251,7 @@ export default class BanCommand extends BaseCommand {
 							ban.victim.user.username
 						);
 						publicBanEmbed.setImage(
-							"https://media4.giphy.com/media/H99r2HtnYs492/giphy.gif"
+							"https://cdn.discordapp.com/attachments/1059910677067735103/1201589779175841812/ezgif-5-374b5db666.gif?ex=65ca5eaf&is=65b7e9af&hm=7b37d610d6ead12e922c5d8ab817226609f3ca1bda973c3f8c60603149d4baf1&"
 						);
 						await clicked.update({
 							embeds: [publicBanEmbed],
