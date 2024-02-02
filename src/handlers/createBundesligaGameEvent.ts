@@ -37,7 +37,7 @@ async function createBundesligaGameEvent(client: BaseClient): Promise<void> {
         entityMetadata: {
             location: gameLocation
         },
-        description: "Das nächste Spiel von Köln wird präsentiert von [E leeve lang](https://instagram.com/e.leeve.lang)! In diesem Event siehst du das nächste Spiel unseres Effzehs! Sei gerne dabei und schreib mit uns während des Events. Klicke auf interessiert, um den Spieltag nicht zu verpassen!",
+        description: "In diesem Event siehst du das nächste Spiel unseres Effzehs! Sei gerne dabei und schreib mit uns während des Events. Klicke auf interessiert, um den Spieltag nicht zu verpassen!",
         reason: "FC Spiel",
         image: "https://cdn.discordapp.com/attachments/1116797977432961197/1176221178550026270/jubel-gladbach.png?ex=656e1456&is=655b9f56&hm=70637599c34cb23defd8aafc093f337a9177bb26558aa9060a95bf335528d138"
     }).catch((): void => {});
